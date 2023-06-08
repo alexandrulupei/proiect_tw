@@ -1,41 +1,188 @@
 
-var varsta1 = document.getElementById("Sub 25 ani");
-var varsta2 = document.getElementById("25 - 29 ani");
-var button2 = document.getElementById("button2");
-var button3 = document.getElementById("button3");
-var button4 = document.getElementById("button4");
+const id_varsta1 = "Sub 25 ani"
+const id_varsta2 = "25 - 29 ani"
+const id_varsta3 = "30 - 39 ani"
+const id_varsta4 = "40 - 49 ani"
+const id_varsta5 ="50 - 55 ani"
+const id_varsta6 = "peste 55 ani"
+
+const id_educatie1 = "fara studii"
+const id_educatie2 = "invatamant primar "
+const id_educatie3 = "invatamant gimnazial "
+const id_educatie4 = "invatamant liceal"
+const id_educatie5 = "invatamant posticeal"
+const id_educatie6 = "invatamant profesional/arte si meserii"
+const id_educatie7 = "invatamant universitar"
+const id_educatie8 = "Total someri, din care: "
+
+const id_mediu1 = "NUMAR TOTAL SOMERI "
+const id_mediu2 = "NUMAR TOTAL SOMERI DIN MEDIUL URBAN "
+const id_mediu3 = "NUMAR SOMERI FEMEI DIN MEDIUL URBAN  "
+const id_mediu4 = "NUMAR SOMERI BARBATI DIN MEDIUL URBAN "
+const id_mediu5 = "NUMAR TOTAL SOMERI DIN MEDIUL RURAL "
+const id_mediu6 = "NUMAR SOMERI FEMEI DIN MEDIUL RURAL "
+const id_mediu7 = "NUMAR SOMERI BARBATI DIN MEDIUL RURAL "
+const id_mediu8 = "NUMAR TOTAL SOMERI FEMEI  "
+const id_mediu9 = "NUMAR TOTAL SOMERI BARBATI "
+
+const id_tip1 = " Numar total someri "
+const id_tip2 = " Numar total someri femei  "
+const id_tip3 = " Numar total someri barbati  "
+const id_tip4 = " Numar  someri indemnizati  "
+const id_tip5 = " Numar someri neindemnizati "
+const id_tip6 = "  Rata somajului (%)  "
+const id_tip7 = "  Rata somajului Feminina (%)  "
+const id_tip8 = "  Rata somajului Masculina (%)  "
+
+var tip1 = document.getElementById(id_tip1);
+var tip2 = document.getElementById(id_tip2);
+var tip3 = document.getElementById(id_tip3);
+var tip4 = document.getElementById(id_tip4);
+var tip5 = document.getElementById(id_tip5);
+var tip6 = document.getElementById(id_tip6);
+var tip7 = document.getElementById(id_tip7);
+var tip8 = document.getElementById(id_tip8);
+
+var varsta1 = document.getElementById(id_varsta1);
+var varsta2 = document.getElementById(id_varsta2);
+var varsta3 = document.getElementById(id_varsta3);
+var varsta4 = document.getElementById(id_varsta4);
+var varsta5 = document.getElementById(id_varsta5);
+var varsta6 = document.getElementById(id_varsta6);
+
+var educatie1 = document.getElementById(id_educatie1);
+var educatie2 = document.getElementById(id_educatie2);
+var educatie3 = document.getElementById(id_educatie3);
+var educatie4 = document.getElementById(id_educatie4);
+var educatie5 = document.getElementById(id_educatie5);
+var educatie6 = document.getElementById(id_educatie6);
+var educatie7 = document.getElementById(id_educatie7);
+var educatie8 = document.getElementById(id_educatie8);
+
+var mediu1 = document.getElementById(id_mediu1);
+var mediu2 = document.getElementById(id_mediu2);
+var mediu3 = document.getElementById(id_mediu3);
+var mediu4 = document.getElementById(id_mediu4);
+var mediu5 = document.getElementById(id_mediu5);
+var mediu6 = document.getElementById(id_mediu6);
+var mediu7 = document.getElementById(id_mediu7);
+var mediu8 = document.getElementById(id_mediu8);
+var mediu9 = document.getElementById(id_mediu9);
+
 var colors = ['#b9b9b9', '#ffa6a9','#cc6674', '#992038','#60000e', '#1a0105']
 
 // slide range
 const rangeInput = document.querySelectorAll("input");
 
-// "Sub 25 ani"
-// "25 - 29 ani"
-// "30 - 39 ani"
-// "40 - 49 ani"
-// "50 - 55 ani"
-// "peste 55 ani"
 
 varsta1.addEventListener("click", function() {
-    colourCountries2("Sub 25 ani", rangeInput[0].value, "/varsta");
+  colourCountries(id_varsta1, rangeInput[0].value, rangeInput[1].value ,  "/varsta");
+  console.log(rangeInput[0].value, rangeInput[1].value );
+});
+varsta2.addEventListener("click", function() {
+  colourCountries("Sub 25 ani", "12", "/varsta");
+});
+varsta3.addEventListener("click", function() {
+  alert("Button 3 clicked!");
+});
+varsta4.addEventListener("click", function() {
+  alert("Button 4 clicked!");
+});
+varsta5.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+varsta6.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+
+
+educatie1.addEventListener("click", function() {
+    colourCountries("Sub 25 ani", rangeInput[0].value, "/varsta");
     console.log(rangeInput[0].value);
 });
-
-varsta2.addEventListener("click", function() {
-    colourCountries2("Sub 25 ani", "12", "/varsta");
+educatie2.addEventListener("click", function() {
+    colourCountries("Sub 25 ani", "12", "/varsta");
 });
-
-button3.addEventListener("click", function() {
+educatie3.addEventListener("click", function() {
     alert("Button 3 clicked!");
 });
-
-button4.addEventListener("click", function() {
+educatie4.addEventListener("click", function() {
     alert("Button 4 clicked!");
+});
+educatie5.addEventListener("click", function() {
+  alert("Button 4 clicked!");
+});
+educatie6.addEventListener("click", function() {
+  alert("Button 4 clicked!");
+});
+educatie7.addEventListener("click", function() {
+  alert("Button 4 clicked!");
+});
+educatie7.addEventListener("click", function() {
+  alert("Button 4 clicked!");
+});
+educatie8.addEventListener("click", function() {
+  alert("Button 4 clicked!");
+});
+
+mediu1.addEventListener("click", function() {
+  colourCountries("Sub 25 ani", rangeInput[0].value, "/varsta");
+  console.log(rangeInput[0].value);
+});
+mediu2.addEventListener("click", function() {
+  colourCountries("Sub 25 ani", "12", "/varsta");
+});
+mediu3.addEventListener("click", function() {
+  alert("Button 3 clicked!");
+});
+mediu4.addEventListener("click", function() {
+  alert("Button 4 clicked!");
+});
+mediu5.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+mediu6.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+mediu7.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+mediu8.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+mediu9.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+
+tip1.addEventListener("click", function() {
+  colourCountries("Sub 25 ani", rangeInput[0].value, rangeInput[1].value, "/varsta");
+  console.log(rangeInput[0].value);
+});
+tip2.addEventListener("click", function() {
+  colourCountries("Sub 25 ani", "12", "/varsta");
+});
+tip3.addEventListener("click", function() {
+  alert("Button 3 clicked!");
+});
+tip4.addEventListener("click", function() {
+  alert("Button 4 clicked!");
+});
+tip5.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+tip6.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+tip7.addEventListener("click", function() {
+alert("Button 4 clicked!");
+});
+tip8.addEventListener("click", function() {
+alert("Button 4 clicked!");
 });
 
 
 
-function colourCountries2(field, month, url){
+function colourCountries(field, month_min, month_max,  url){
 
     fetch(url, {
     method: 'GET',
@@ -53,16 +200,30 @@ function colourCountries2(field, month, url){
     // Loop through each data
     console.log(json)
     var data = {}
-    for(var i = 0; i < json.length; i++) {
+
+    if(month_min == month_max){
+
+      for(var i = 0; i < json.length; i++) {
         var product = json[i];
-        if(product['JUDET'] != 'TOTAL' &&  product['luna'] == month ){
-            data[product['JUDET']] = parseInt(product[field]);
-            // console.log(data[product['JUDET]])
-            // console.log(json[i])
-            // console.log(product['JUDET'])
-            // colourCountry(product['JUDET'], 3);
+          if(product['JUDET'] != 'TOTAL' &&  product['luna'] == month_min ){
+              data[product['JUDET']] = parseInt(product[field]);
+          
         }
+      }
+   }else{
+      for(var i = 0; i < json.length; i++) {
+        var product = json[i];
+          if(product['JUDET'] != 'TOTAL' &&  product['luna'] >= month_min && product['luna'] <= month_max){
+            if(data[product['JUDET']] == null){
+              data[product['JUDET']] = parseInt(product[field]);
+            }
+            else{
+              data[product['JUDET']] += parseInt(product[field]);
+            } 
+        }
+      }
     }
+   
     process_data(data);
         
     }).catch(err => {
