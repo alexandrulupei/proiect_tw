@@ -10,7 +10,7 @@ body {
   background: #272727;
   font-family: "Montserrat", sans-serif;
 }
-h1{
+h2{
   color: #f6f4e6;
   font-family: "Montserrat", sans-serif;
   position: absolute;
@@ -117,3 +117,4 @@ h1{
 .navbar a:hover {
   color: #fddb3a;
 }
+
