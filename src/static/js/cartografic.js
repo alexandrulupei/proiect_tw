@@ -190,8 +190,11 @@ function process_data(data){
             min = data[county];
         }
     }
-    var valueRange = (max - min) / 5;
-    updateLegend(valueRange)
+
+    min = round(min)
+    max = round(max)
+    var valueRange = round((max - min) / 5)
+    updateLegend(valueRange, min)
     console.log(valueRange)
 
     for(var county in data){
@@ -199,23 +202,45 @@ function process_data(data){
         console.log(min, max)
         console.log(colorIndex)
         console.log(data[county])
+        console.log(county)
         colourCountry(county, colors[colorIndex]);
     }
 }
 
-function updateLegend(step){
-  for(var index = 1; index <= 6; index++){
+function updateLegend(step, minvalue){   
+   for(var index = 1; index <= 6; index++){
     var legend = document.getElementById("legend" + index);
-    legend.textContent = Math.floor(index * step);
+    
+    if(index == 1){
+      legend.textContent = "< " + (Math.floor((minvalue + index * step) * 10) / 10).toString()
+    }
+      else if(index == 6){
+      legend.textContent = "> " + (Math.floor((minvalue + index * step) * 10) / 10).toString() 
+      }
+      else{
+      legend.textContent = (Math.floor(((minvalue + 1) + (index - 1) * step) * 10) / 10).toString() + " - " + (Math.floor((minvalue + index * step) * 10) / 10).toString()
+      }
   }
 }
 
+function round(number){
+  if( number >= 100 && number < 1000 ){
+      return Math.round(number / 10) * 10;
+   }  else if(number >= 1000 && number < 10000 ){
+      return Math.round(number / 100) * 100;
+   }  else if(number >= 10000 && number < 100000 ){
+      return Math.round(number / 1000) * 1000;
+   }
+   return number;
+}
 
 //function that color document element by id and specified color
 function colourCountry(name, colour) {
     var country = document.getElementById(name);
     country.style.fill = colour;
 }
+
+/*------------------------- Range Slider -------------------------- */
 
 
 // double range slider start
