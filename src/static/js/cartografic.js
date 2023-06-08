@@ -76,6 +76,14 @@ var mediu7 = document.getElementById(id_mediu7);
 var mediu8 = document.getElementById(id_mediu8);
 var mediu9 = document.getElementById(id_mediu9);
 
+//Legend text 
+var legend1 = document.getElementById("legend1");
+var legend2 = document.getElementById("legend2");
+var legend3 = document.getElementById("legend3");
+var legend4 = document.getElementById("legend4");
+var legend5 = document.getElementById("legend5");
+var legend6 = document.getElementById("legend6");
+
 // Colors code for map coloring
 var colors = ['#b9b9b9', '#ffa6a9','#cc6674', '#992038','#60000e', '#1a0105']
 
@@ -182,15 +190,24 @@ function process_data(data){
             min = data[county];
         }
     }
-    var valueRange = (min - max) / 5;
+    var valueRange = (max - min) / 5;
+    updateLegend(valueRange)
+    console.log(valueRange)
 
     for(var county in data){
-        var colorIndex = Math.abs(Math.floor((data[county] - min) / valueRange));
+        var colorIndex = Math.floor((data[county] - min) / valueRange);
         console.log(min, max)
         console.log(colorIndex)
         console.log(data[county])
         colourCountry(county, colors[colorIndex]);
     }
+}
+
+function updateLegend(step){
+  for(var index = 1; index <= 6; index++){
+    var legend = document.getElementById("legend" + index);
+    legend.textContent = Math.floor(index * step);
+  }
 }
 
 
