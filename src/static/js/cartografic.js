@@ -243,11 +243,14 @@ function colourCountry(name, colour) {
 
 /* ---------------------- Downland Button ------------------------- */
 
-var downloadSVG = document.getElementById("svgas")
+var downloadSVG = document.getElementById("getSVG")
 downloadSVG.addEventListener("click", function() {save_as_svg()});
 
-var downloadJPEG = document.getElementById("jpgas")
+var downloadJPEG = document.getElementById("getJPG")
 downloadJPEG.addEventListener("click", function() {save_as_jpg()});
+
+var dowloadPDF = document.getElementById("getPDF")
+dowloadPDF.addEventListener("click", function() {save_as_pdf})
 
 function save_as_svg(){
   var svg_data = document.getElementById("svg").innerHTML //put id of your svg element here
@@ -319,6 +322,46 @@ function save_as_jpg(){
   img.src = url;
 }
 
+function save_as_pdf() {
+  //Get svg markup as string
+  var svg = document.getElementById('svg').innerHTML;
+if (svg)
+    svg = svg.replace(/\r?\n|\r/g, '').trim();
+
+  var canvas = document.createElement('canvas');
+  var context = canvas.getContext('2d');
+
+
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  canvg(canvas, svg);
+
+  var imgData = canvas.toDataURL('image/png');
+
+  // Generate PDF
+  var doc = new jsPDF('p', 'pt', 'a4');
+  doc.addImage(imgData, 'PNG', 0, 0, 500, 500);
+  doc.save('test.pdf');
+  // doc.download('test.pdf')
+  // saveAs(doc, "test.pdf")
+  // const a = document.createElement("a");
+  // a.download = doc
+  downloadPDF(svg, 'test.pdf')
+  console.log(doc)
+}
+
+function downloadPDF(svg, outFileName) {
+  let doc = new PDFDocument({compress: false});
+  SVGtoPDF(doc, svg, 0, 0);
+  let stream = doc.pipe(blobStream());
+  stream.on('finish', () => {
+    let blob = stream.toBlob('application/pdf');
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = outFileName + ".pdf";
+    link.click();
+  });
+  doc.end();
+}
 
 /*------------------------- Range Slider -------------------------- */
 
