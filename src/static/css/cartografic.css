@@ -203,7 +203,7 @@ border: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
 
 
@@ -276,7 +276,7 @@ border: none;
     bottom: 0;
     transform: translate(0, -100%);
     left: 0;
-    font-size: 1rem;
+    font-size: 0.8rem;
     transition: left 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     will-change: left, transform;
   }
@@ -289,7 +289,7 @@ border: none;
     top: 0;
     transform: translate(0, 100%);
     right: 0;
-    font-size: 1rem;
+    font-size: 0.8rem;
     transition: right 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     will-change: right, transform;
   }
