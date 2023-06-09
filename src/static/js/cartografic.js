@@ -1,3 +1,4 @@
+
 // Varsta buttons ids
 const id_varsta1 = "Sub 25 ani"
 const id_varsta2 = "25 - 29 ani"
@@ -242,20 +243,21 @@ function colourCountry(name, colour) {
 
 /* ---------------------- Downland Button ------------------------- */
 
-var download = document.getElementById("svgas")
-download.addEventListener("click", function() {save_as_svg()});
+var downloadSVG = document.getElementById("svgas")
+downloadSVG.addEventListener("click", function() {save_as_svg()});
+
+var downloadJPEG = document.getElementById("jpgas")
+downloadJPEG.addEventListener("click", function() {save_as_jpg()});
 
 function save_as_svg(){
   var svg_data = document.getElementById("svg").innerHTML //put id of your svg element here
-  var head = '<svg id="svg"  baseprofile="tiny"  height="780" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" version="1.2" viewbox="150 -60 1100 1000" width="1100" xmlns="http://www.w3.org/2000/svg">'
+  var head = '<svg id="svg" style="background-color: #272727;" baseprofile="tiny"   height="780" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" version="1.2" viewbox="150 -60 1100 1000" width="1100" xmlns="http://www.w3.org/2000/svg">'
 
   //if you have some additional styling like graph edges put them inside <style> tag
   var style = '<style>circle {cursor: pointer;stroke-width: 1.5px;}text {font: 10px arial;}path {stroke: DimGrey;stroke-width: 1.5px;}</style>'
   var full_svg = head +  style + svg_data + "</svg>"
   var blob = new Blob([full_svg], {type: "image/svg+xml"});  
-  saveAs(blob, "graph.pdf");
-
-
+  saveAs(blob, "graph.svg");
 };
 
 function saveAs(content, fileName) {
@@ -272,6 +274,51 @@ function saveAs(content, fileName) {
     window.URL.revokeObjectURL(url);
   }
 }
+
+
+function triggerDownload (imgURI) {
+  var evt = new MouseEvent('click', {
+    view: window,
+    bubbles: false,
+    cancelable: true
+  });
+
+  var a = document.createElement('a');
+  a.setAttribute('download', 'MY_COOL_IMAGE.png');
+  a.setAttribute('href', imgURI);
+  a.setAttribute('target', '_blank');
+
+  a.dispatchEvent(evt);
+}
+
+function save_as_jpg(){
+  var svg = document.getElementById('svg');
+  let {width, height} = svg.getBBox(); 
+  var canvas = document.createElement('canvas');
+  canvas.widht = width * 3;  
+  canvas.height = height * 3;
+  var ctx = canvas.getContext('2d');
+  var data = (new XMLSerializer()).serializeToString(svg);
+  var DOMURL = window.URL || window.webkitURL || window;
+
+  var img = new Image();
+  var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+  var url = DOMURL.createObjectURL(svgBlob);
+
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0 , 400, 400 );
+    DOMURL.revokeObjectURL(url);
+
+    var imgURI = canvas
+        .toDataURL('image/png')
+        .replace('image/png', 'image/octet-stream');
+
+    triggerDownload(imgURI);
+  };
+
+  img.src = url;
+}
+
 
 /*------------------------- Range Slider -------------------------- */
 
