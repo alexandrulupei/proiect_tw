@@ -1,7 +1,7 @@
 
 // const dbUrl= 'mongodb+srv://admin:admin@atlascluster.vsdtg2f.mongodb.net/'
 
-const mongodb = require('mongodb')
+//const mongodb = require('mongodb')
 // const ObjectId = mongodb.ObjectId
 const getDb = require('./database').getDb
 

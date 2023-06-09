@@ -242,11 +242,38 @@ function colourCountry(name, colour) {
 
 /* ---------------------- Downland Button ------------------------- */
 
+var download = document.getElementById("svgas")
+download.addEventListener("click", function() {save_as_svg()});
+
+function save_as_svg(){
+  var svg_data = document.getElementById("svg").innerHTML //put id of your svg element here
+  var head = '<svg id="svg"  baseprofile="tiny"  height="780" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" version="1.2" viewbox="150 -60 1100 1000" width="1100" xmlns="http://www.w3.org/2000/svg">'
+
+  //if you have some additional styling like graph edges put them inside <style> tag
+  var style = '<style>circle {cursor: pointer;stroke-width: 1.5px;}text {font: 10px arial;}path {stroke: DimGrey;stroke-width: 1.5px;}</style>'
+  var full_svg = head +  style + svg_data + "</svg>"
+  var blob = new Blob([full_svg], {type: "image/svg+xml"});  
+  saveAs(blob, "graph.pdf");
 
 
+};
+
+function saveAs(content, fileName) {
+  const a = document.createElement("a");
+  const isBlob = content.toString().indexOf("Blob") > -1;
+  let url = content;
+  if (isBlob) {
+    url = window.URL.createObjectURL(content);
+  }
+  a.href = url;
+  a.download = fileName;
+  a.click();
+  if (isBlob) {
+    window.URL.revokeObjectURL(url);
+  }
+}
 
 /*------------------------- Range Slider -------------------------- */
-
 
 // double range slider start
 function collision($div1, $div2) {
