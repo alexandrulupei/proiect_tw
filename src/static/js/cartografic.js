@@ -20,7 +20,7 @@ const id_educatie8 = "Total someri, din care: "
 // Mediu buttons ids
 const id_mediu1 = "NUMAR TOTAL SOMERI "
 const id_mediu2 = "NUMAR TOTAL SOMERI DIN MEDIUL URBAN "
-const id_mediu3 = "NUMAR SOMERI FEMEI DIN MEDIUL URBAN  "
+const id_mediu3 = "NUMAR SOMERI FEMEI DIN MEDIUL URBAN "
 const id_mediu4 = "NUMAR SOMERI BARBATI DIN MEDIUL URBAN "
 const id_mediu5 = "NUMAR TOTAL SOMERI DIN MEDIUL RURAL "
 const id_mediu6 = "NUMAR SOMERI FEMEI DIN MEDIUL RURAL "
@@ -171,7 +171,7 @@ function colourCountries(field, month_min, month_max,  url){
           }
         }
       }
-      process_data(data);
+      process_data(data, field);
         
     }).catch(err => {
       console.log(err)
@@ -179,7 +179,7 @@ function colourCountries(field, month_min, month_max,  url){
 }
 
 
-function process_data(data){
+function process_data(data, field){
     console.log(data)
     var max = -Infinity;
     var min = Infinity;
@@ -195,7 +195,7 @@ function process_data(data){
     min = round(min)
     max = round(max)
     var valueRange = round((max - min) / 5)
-    updateLegend(valueRange, min)
+    updateLegend(valueRange, min, field)
     console.log(valueRange)
 
     for(var county in data){
@@ -208,9 +208,13 @@ function process_data(data){
     }
 }
 
-function updateLegend(step, minvalue){   
+function updateLegend(step, minvalue, field){   
+  var legendfield = document.getElementById("legend0");
+  legendfield.textContent = field;
    for(var index = 1; index <= 6; index++){
     var legend = document.getElementById("legend" + index);
+    // var legendbox = document.getElementById("legendbox" + index);
+    // legendbox.style.color = colors[index-1];
     
     if(index == 1){
       legend.textContent = "< " + (Math.floor((minvalue + index * step) * 10) / 10).toString()
@@ -298,8 +302,8 @@ function save_as_jpg(){
   var svg = document.getElementById('svg');
   let {width, height} = svg.getBBox(); 
   var canvas = document.createElement('canvas');
-  canvas.widht = width * 3;  
-  canvas.height = height * 3;
+  canvas.widht = width ;  
+  canvas.height = height ;
   var ctx = canvas.getContext('2d');
   var data = (new XMLSerializer()).serializeToString(svg);
   var DOMURL = window.URL || window.webkitURL || window;
@@ -309,7 +313,7 @@ function save_as_jpg(){
   var url = DOMURL.createObjectURL(svgBlob);
 
   img.onload = function () {
-    ctx.drawImage(img, 0, 0 , 400, 400 );
+    ctx.drawImage(img, 0, 0, 400, 400);
     DOMURL.revokeObjectURL(url);
 
     var imgURI = canvas
