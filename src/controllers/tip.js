@@ -1,4 +1,4 @@
-const dataRepository = require("../models/dataRepository");
+const dataRepository = require("../models/countyModel");
 
 
 async function tipController(req, res){

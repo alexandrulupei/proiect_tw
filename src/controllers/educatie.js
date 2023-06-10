@@ -1,5 +1,5 @@
 // const imageRepositoryEducatie = require("../models/imageRepositoryEducatie");
-const dataRepository = require("../models/dataRepository");
+const dataRepository = require("../models/countyModel");
 
 
 async function educatieController(req, res){

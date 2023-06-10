@@ -12,10 +12,11 @@ let viewGrafic = getView('./grafic.html');
 let viewTabelar = getView('./tabelar.html');
 let viewLiniar = getView('./liniar.html');
 let viewContact = getView('./contact.html');
+let viewLoginRegister = getView('./login_register.html');
 
 
 
 
 module.exports = {
-   viewHome, viewCartografic, viewGrafic, viewTabelar, viewLiniar, viewContact
+   viewHome, viewCartografic, viewGrafic, viewTabelar, viewLiniar, viewContact, viewLoginRegister
 }

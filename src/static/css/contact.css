@@ -8,8 +8,9 @@ box-sizing: border-box;
 }
 
 body {
-color: #f6f4e6;
+/* color: #f6f4e6; */
 background: #262626;
+background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 font-family: "Montserrat", sans-serif;
 }
 h1{
