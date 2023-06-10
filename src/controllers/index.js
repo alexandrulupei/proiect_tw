@@ -8,6 +8,10 @@ const { varstaController } = require("./varsta")
 const { educatieController } = require("./educatie")
 const { tipController } = require("./tip")
 const { mediuController } = require("./mediu")
+const { loginRegisterController } = require("./loginRegister")
+const { loginUserController } = require("./loginUser")
+const { registerUserController } = require("./registerUser")
+
 
 
 
@@ -16,5 +20,5 @@ const { mediuController } = require("./mediu")
 
 module.exports = {
     homeController, cartograficController, graficController, tabelarController, liniarController, contactController, varstaController, educatieController,
-    tipController, mediuController
+    tipController, mediuController, loginRegisterController, loginUserController, registerUserController
 };

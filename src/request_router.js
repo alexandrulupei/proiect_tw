@@ -17,7 +17,7 @@ const server = require("http")
   .createServer((request, response) => {
     if (request.url === "/") {
 
-      control1.homeController(request, response);
+      control1.loginRegisterController(request, response);
     }
     else if (request.url.match(".css$")) {
       const cssPath = path.join(__dirname, request.url);
@@ -89,6 +89,18 @@ const server = require("http")
     else if (request.url === "/tip") {
  
       control1.tipController(request,response);
+    }
+    else if (request.url === "/login") {
+ 
+      control1.loginRegisterController(request,response);
+    }
+    else if (request.url === "/login-user") {
+ 
+      control1.loginUserController(request,response);
+    }
+    else if (request.url === "/register-user") {
+ 
+      control1.registerUserController(request,response);
     }
   })
 

@@ -1,11 +1,11 @@
 const { viewLoginRegister } = require('../views/templates');
 
-function contactController(req, res) {
+function loginRegisterController(req, res) {
  
     switch(req.method) {
         case "GET" : 
             res.writeHead(200, {'Content-Type' : 'text/html'});
-            res.end(viewLoginRegisters, 'utf8');
+            res.end(viewLoginRegister, 'utf8');
             break;
         default :
             res.writeHead(405);
@@ -14,5 +14,5 @@ function contactController(req, res) {
 }
 
 module.exports = {
-    contactController
+    loginRegisterController
 }

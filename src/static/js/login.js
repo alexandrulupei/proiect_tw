@@ -1,4 +1,4 @@
-const form = document.getElementById('login-form')
+const form = document.getElementById('signinform')
 
 form.addEventListener('submit', loginUser)
 
@@ -6,8 +6,8 @@ async function loginUser(event) {
     event.preventDefault()
 
     // form data
-    const username = document.getElementById('logname').value
-    const password = document.getElementById('logpass').value
+    const username = document.getElementById('inname').value
+    const password = document.getElementById('inpswd').value
 
     console.log("[login]", username, password)
 

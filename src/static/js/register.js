@@ -1,19 +1,19 @@
-const form = document.getElementById('register-form')
+const formRegister = document.getElementById('signupform')
 
-form.addEventListener('submit', userRegister)
+formRegister.addEventListener('submit', userRegister)
 
 async function userRegister(event) {
     event.preventDefault()
 
     // form data
-    const username = document.getElementById('regname').value
-    const password1 = document.getElementById('regpass1').value
-    const email = document.getElementById('regmail').value
-    const password2 = document.getElementById('regpass2').value
+    const username = document.getElementById('upname').value
+    const password1 = document.getElementById('uppswd').value
+    const email = document.getElementById('upemail').value
+    const password2 = document.getElementById('uppswd2').value
 
     console.log("[register]", username, password1, email, password2)
 
-    await fetch('/add-user', {
+    await fetch('/register-user', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

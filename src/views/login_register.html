@@ -12,24 +12,32 @@
     <input type="checkbox" id="chk" aria-hidden="true">
 
     <div class="signup">
-      <form>
-        <label id="signup" for="chk" aria-hidden="true">Sign up</label>
-        <input type="text" name="txt" placeholder="User name" required="">
-        <input type="email" name="email" placeholder="Email" required="">
-        <input type="password" name="pswd" placeholder="Password" required="">
-        <input type="password2" name="pswd2" placeholder="Confirm password" required="">
-        <button>Sign up</button>
+      <form id="signupform">
+        <label for="chk" aria-hidden="true">Sign up</label>
+        <input id="upname" type="text" name="txt" placeholder="User name" required="">
+        <input id="upemail" type="email" name="email" placeholder="Email" required="">
+        <input id="uppswd" type="password" name="pswd" placeholder="Password" required="">
+        <input id="uppswd2" type="password2" name="pswd2" placeholder="Confirm password" required="">
+        <button id="register" type="submit">Sign up</button>
       </form>
     </div>
 
+    <script src="../static/js/register.js"></script>
+
     <div class="login">
-      <form>
+      <form id="signinform">
         <label for="chk" aria-hidden="true">Login</label>
-        <input type="email" name="email" placeholder="Email" required="">
-        <input type="password" name="pswd" placeholder="Password" required="">
+        <input id="inname" type="text" name="txt" placeholder="User name" required="">
+        <input id="inpswd" type="password" name="pswd" placeholder="Password" required="">
         <button>Login</button>
       </form>
     </div>
+  </div>
+  <script src="../static/js/login.js"></script>
+
+  <div class="navbar">
+    <a href="./home.html" class="active">Home</a>
+    <a href="./contact.html">Contact</a>
   </div>
 </body>
 
