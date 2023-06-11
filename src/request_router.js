@@ -17,7 +17,7 @@ const server = require("http")
   .createServer((request, response) => {
     if (request.url === "/") {
 
-      control1.loginRegisterController(request, response);
+      control1.homeController(request, response);
     }
     else if (request.url.match(".css$")) {
       const cssPath = path.join(__dirname, request.url);

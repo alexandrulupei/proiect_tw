@@ -84,7 +84,7 @@ async function loginUserController(req, res) {
           } else {
             res.writeHead(403, { "Content-Type": "application/json" });
             res.end(
-              JSON.stringify({ route: "/Login.html", message: "Wrong password!" })
+              JSON.stringify({ route: "/login", message: "Wrong password!" })
             );
           }
         } else {
@@ -92,7 +92,7 @@ async function loginUserController(req, res) {
           res.writeHead(403, { "Content-Type": "application/json" });
   
           res.end(
-            JSON.stringify({ route: "/Login.html", message: "Wrong username!" })
+            JSON.stringify({ route: "/login", message: "Wrong username!" })
           );
         }
       }
