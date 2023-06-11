@@ -131,6 +131,20 @@ tip7.addEventListener("click", function() {colourCountries(id_tip7, rangeInput[0
 tip8.addEventListener("click", function() {colourCountries(id_tip8, rangeInput[0].value, rangeInput[1].value ,  "/tip");});
 
 
+var checkInput = document.getElementById('check');
+var on = document.getElementsByClassName('on');
+var off = document.getElementsByClassName('off');
+
+checkInput.addEventListener("click", function(){
+if (checkInput.checked == true) {
+  on[0].style.color="green";
+  off[0].style.color="#253b52";
+} else {
+ on[0].style.color="#253b52";
+  off[0].style.color="green";
+}
+})
+
 function colourCountries(field, month_min, month_max,  url){
 
     fetch(url, {
@@ -148,6 +162,7 @@ function colourCountries(field, month_min, month_max,  url){
       // Loop through each data
       console.log(json)
       var data = {}
+      var countyPopulation = {}
 
       if(month_min == month_max){
 
@@ -368,7 +383,7 @@ function downloadPDF(svg, outFileName) {
 }
 
 /*------------------------- Range Slider -------------------------- */
-
+  
 // double range slider start
 function collision($div1, $div2) {
     var x1 = $div1.offset().left;
@@ -394,7 +409,7 @@ const maxval = document.querySelector(".maxvalue");
 let minRange, maxRange, minPercentage, maxPercentage;
 
 const minRangeFill = () => {
-  range.style.left = (rangeInput[0].value / rangeInput[0].max) * 100 + "%";
+  range.style.left = (rangeInput[0].value / rangeInput[0].max) * 100 - 4+ "%";
 };
 const maxRangeFill = () => {
   range.style.right =
@@ -402,7 +417,7 @@ const maxRangeFill = () => {
 };
 const MinVlaueBubbleStyle = () => {
   minPercentage = (minRange / rangeInput[0].max) * 100;
-  minval.style.left = minPercentage + "%";
+  minval.style.left = minPercentage+ "%";
   minval.style.transform = `translate(-${minPercentage / 2}%, -100%)`;
 };
 const MaxVlaueBubbleStyle = () => {
@@ -451,8 +466,10 @@ rangeInput.forEach((input) => {
         setMaxValueOutput();
         maxRangeFill();
         MaxVlaueBubbleStyle();
+        
       }
     }
+
   });
 });
 // double range slider end

@@ -244,20 +244,11 @@ border: none;
 
   /* double  range slider */
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-  }
-
-
-
   .double_range_slider_box {
     position: relative;
     width: 615px;
     height: 120px;
-    background: #262626;
+    /* background: #262626; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -319,7 +310,7 @@ border: none;
     border-radius: 1rem;
     color: white;
     bottom: 0;
-    transform: translate(0, -100%);
+    transform: translate(0, -98%);
     left: 0;
     font-size: 0.8rem;
     transition: left 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);

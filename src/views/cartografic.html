@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
         <link rel="stylesheet" type="text/css" href="../static/css/cartografic.css" /> 
+        <link rel="stylesheet" type="text/css" href="../static/css/toogleSwitch.css" />
         <script type='module' src="../static/js/cartografic.js"></script>
 
         <!-- primul info -->
@@ -52,7 +53,7 @@
       
         
       <!-- meniu butoane si slider -->
-
+            
       <!-- slider -->
        <div style = "position:absolute; left:810px; top:70px; " > 
         
@@ -60,7 +61,7 @@
           <div class="double_range_slider">
             <span class="range_track" id="range_track"></span>
       
-            <input type="range" class="min" min="1" max="12" value="1" step="1">
+            <input type="range" class="min" min="1" max="13" value="1" step="1">
             <input type="range" class="max" min="0" max="12" value="2" step="1">
       
             <div class="minvalue"></div>
@@ -68,6 +69,15 @@
           </div>
           <!-- <script type='module' src="../static/js/cartografic.js"></script> -->
         </div>
+
+        <div class="container">
+          <div class="off">Rata somaj</div>
+          <label class="switch">
+            <input id="check" type="checkbox">
+            <span class="toggle"></span>
+          </label>
+          <div class="on">Numar someri</div>
+          </div>
 
         <!-- mediu si submeniu -->
         <div class="dropdown">
@@ -128,16 +138,6 @@
 
        </div>
             
-      <!-- <div  style = "position:absolute; left:670px; top:191px; " >
-        <div class="dropdown">
-          <button id="download" class="button" >Download</button>
-            <div >
-              <a id="svgas"> as SVG </a>
-              <a id="pngas">as PNG</a>
-              <a id="jpgas">as JPG</a>
-            </div>
-        </div>
-      </div>  -->
 
         <div class="navbar">
             <a href="./home.html" class="active">Home</a>
