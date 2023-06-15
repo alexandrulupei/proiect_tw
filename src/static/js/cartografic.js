@@ -141,7 +141,7 @@ if (checkInput.checked == true) {
   off[0].style.color="#253b52";
 } else {
  on[0].style.color="#253b52";
-  off[0].style.color="green";
+  off[0].style.color="red";
 }
 })
 
@@ -162,21 +162,31 @@ function colourCountries(field, month_min, month_max,  url){
       // Loop through each data
       console.log(json)
       var data = {}
-      var countyPopulation = {}
+      var countyUnempolyed = {}
+      var countyRate = {}
+      var isBaseValue = checkInput.checked
+      console.log(isBaseValue)
 
       if(month_min == month_max){
 
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
-            if(product['JUDET'] != 'TOTAL' &&  product['luna'] == month_min ){
+            if(product['JUDET'] != 'TOTAL' &&  product['luna'] == month_min){
+              if(product[field]){  
                 data[product['JUDET']] = parseInt(product[field]);
-            
-          }
+              }
+              if(product['Numar total someri ']){
+                countyUnempolyed[product['JUDET']] = parseInt(product['Numar total someri '])
+              }
+              if(product['Rata somajului (%)  ']){
+                countyRate[product['JUDET']] = parseFloat(product['Rata somajului (%)  '])
+              }
+          } 
         }
     }else{
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
-            if(product['JUDET'] != 'TOTAL' &&  product['luna'] >= month_min && product['luna'] <= month_max){
+            if(product['JUDET'] != 'TOTAL' && product['luna'] >= month_min && product['luna'] <= month_max){
               if(data[product['JUDET']] == null){
                 data[product['JUDET']] = parseInt(product[field]);
               }
@@ -186,7 +196,15 @@ function colourCountries(field, month_min, month_max,  url){
           }
         }
       }
-      process_data(data, field);
+
+      if(isBaseValue == false){
+        var ratio = {}
+        ratio = getRatio(data, countyUnempolyed, countyRate)
+        // console.log(data)
+        process_data(ratio, field, false);
+      }else{
+        process_data(data, field, true);
+      }
         
     }).catch(err => {
       console.log(err)
@@ -194,10 +212,27 @@ function colourCountries(field, month_min, month_max,  url){
 }
 
 
-function process_data(data, field){
-    console.log(data)
+function getRatio(data, countyUnempolyed, countyRate){
+  var resultRatioData = {}
+  for(var countyKey in data){
+    resultRatioData[[countyKey]] = (data[countyKey] * 100) / ((countyUnempolyed[countyKey] * 100) / countyRate[countyKey]);
+  }
+  console.log(data)
+  console.log(countyUnempolyed)
+  console.log(countyRate)
+  console.log(resultRatioData)
+  return resultRatioData;
+}
+
+
+function process_data(data, field, flag){
+    // console.log(data)
     var max = -Infinity;
     var min = Infinity;
+    if(flag == false){
+      for(var county in data)
+        data[county] = data[county] * 100
+    }
     for(var county in data){
         if(data[county] > max){
             max = data[county];
@@ -207,23 +242,31 @@ function process_data(data, field){
         }
     }
 
-    min = round(min)
-    max = round(max)
-    var valueRange = round((max - min) / 5)
-    updateLegend(valueRange, min, field)
+    // min = round(min)
+      // max = round(max)
+    var valueRange = Math.floor((max - min) / 5)
+    updateLegend(valueRange, min, field, flag)
     console.log(valueRange)
 
     for(var county in data){
         var colorIndex = Math.floor((data[county] - min) / valueRange);
-        console.log(min, max)
-        console.log(colorIndex)
-        console.log(data[county])
-        console.log(county)
+        // console.log(min, max)
+        // console.log(colorIndex)
+        // console.log(data[county])
+        // console.log(county)
         colourCountry(county, colors[colorIndex]);
     }
 }
 
-function updateLegend(step, minvalue, field){   
+function updateLegend(step, minvalue, field, flag){
+  var margin = 10
+  var flagDiv = 1
+  if(flag == false){
+    // step = step / 100
+    // minvalue = minvalue / 100
+    margin = 1000
+    flagDiv = 100
+  }
   var legendfield = document.getElementById("legend0");
   legendfield.textContent = field;
    for(var index = 1; index <= 6; index++){
@@ -232,13 +275,13 @@ function updateLegend(step, minvalue, field){
     // legendbox.style.color = colors[index-1];
     
     if(index == 1){
-      legend.textContent = "< " + (Math.floor((minvalue + index * step) * 10) / 10).toString()
+      legend.textContent = "< " + (Math.floor((minvalue + index * step) * 10) / margin).toString()
     }
       else if(index == 6){
-      legend.textContent = "> " + (Math.floor((minvalue + index * step) * 10) / 10).toString() 
+      legend.textContent = "> " + (Math.floor((minvalue +   index * step - step) * 10) / margin).toString() 
       }
       else{
-      legend.textContent = (Math.floor(((minvalue + 1) + (index - 1) * step) * 10) / 10).toString() + " - " + (Math.floor((minvalue + index * step) * 10) / 10).toString()
+      legend.textContent = (Math.floor(((minvalue + 1) + (index - 1) * step) * 10) / margin).toString() + " - " + (Math.floor((minvalue + index * step) * 10) / margin).toString()
       }
   }
 }
