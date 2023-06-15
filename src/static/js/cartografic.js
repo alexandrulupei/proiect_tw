@@ -215,7 +215,7 @@ function colourCountries(field, month_min, month_max,  url){
 function getRatio(data, countyUnempolyed, countyRate){
   var resultRatioData = {}
   for(var countyKey in data){
-    resultRatioData[[countyKey]] = (data[countyKey] * 100) / ((countyUnempolyed[countyKey] * 100) / countyRate[countyKey]);
+    resultRatioData[countyKey] = (data[countyKey] * 100) / ((countyUnempolyed[countyKey] * 100) / countyRate[countyKey]);
   }
   console.log(data)
   console.log(countyUnempolyed)
