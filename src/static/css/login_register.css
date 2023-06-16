@@ -5,17 +5,16 @@ body{
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	font-family: 'Jost', sans-serif;
-	/* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
-    /* background: linear-gradient(to bottom, #afd9cb, #bae0c8, #8caba0); */
-    background: linear-gradient(to bottom, #6f8980, #5a7b66, #31423c);
+	background: linear-gradient(to bottom, #523cf3, #223f7c, #523cf3);
+    font-family: "Montserrat", sans-serif;
+	
 }
 .main{
 	width: 350px;
 	height: 530px;
-	background: rgb(36, 30, 75);
+	background: red;
 	overflow: hidden;
-	/* background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover; */
+	background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
 }
@@ -89,29 +88,4 @@ button:hover{
 }
 #chk:checked ~ .signup label{
 	transform: scale(.6);
-}
-
-.navbar {
-    background-color: #0a0322;
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Style the links inside the navigation bar */
-.navbar a {
-    float: left;
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    color: #f6f4e6;
-    font-family: "Montserrat", sans-serif;
-}
-
-/* Change the color of links on hover */
-.navbar a:hover {
-    color: #000000;
 }
