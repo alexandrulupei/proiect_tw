@@ -33,22 +33,6 @@ const server = require("http")
       fileStream.pipe(response);
       
     }
-
-    else if (request.url.match(".json$")) {
-      const { viewJson } = require('./static/js/educatie_1.json');
-
-      switch(request.method) {
-          case "GET" : 
-              response.writeHead(200, {'Content-Type' : 'application/json'});
-              response.end(viewJson, 'utf8');
-              break;
-          default :
-              response.writeHead(405);
-              response.end();
-          
-      }
-    }
-    
     else if (request.url === "/home.html") {
 
       control1.homeController(request, response);

@@ -62,7 +62,7 @@ h2 {
   }
   
   .off {
-    color: green;
+    /* color: #253b52; */
     transition: all .5s ease;
   }
   

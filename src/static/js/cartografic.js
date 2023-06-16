@@ -86,7 +86,8 @@ var legend5 = document.getElementById("legend5");
 var legend6 = document.getElementById("legend6");
 
 // Colors code for map coloring
-var colors = ['#b9b9b9', '#ffa6a9','#cc6674', '#992038','#60000e', '#1a0105']
+// var colors = ['#b9b9b9', '#ffa6a9','#cc6674', '#992038','#60000e', '#1a0105']
+var colors = ['#75e6de', '#7b9cd9','#77aa3d', '#fcd45b','#f2b31f', '#b72121']
 
 // slide range
 const rangeInput = document.querySelectorAll("input");
@@ -137,11 +138,11 @@ var off = document.getElementsByClassName('off');
 
 checkInput.addEventListener("click", function(){
 if (checkInput.checked == true) {
-  on[0].style.color="green";
+  on[0].style.color="black";
   off[0].style.color="#253b52";
 } else {
  on[0].style.color="#253b52";
-  off[0].style.color="red";
+  off[0].style.color="black";
 }
 })
 
@@ -187,12 +188,28 @@ function colourCountries(field, month_min, month_max,  url){
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
             if(product['JUDET'] != 'TOTAL' && product['luna'] >= month_min && product['luna'] <= month_max){
-              if(data[product['JUDET']] == null){
-                data[product['JUDET']] = parseInt(product[field]);
-              }
-              else{
-                data[product['JUDET']] += parseInt(product[field]);
+              if(product[field]){
+                if(data[product['JUDET']] == null){
+                  data[product['JUDET']] = parseInt(product[field]);
+                }
+                else{
+                  data[product['JUDET']] += parseInt(product[field]);
+                }
               } 
+              if(product['Numar total someri ']){
+                if( countyUnempolyed[product['JUDET']] == null){
+                  countyUnempolyed[product['JUDET']] = parseInt(product['Numar total someri '])
+                }else{
+                  countyUnempolyed[product['JUDET']] += parseInt(product['Numar total someri '])
+                }
+              }
+              if(product['Rata somajului (%)  ']){
+                if(countyRate[product['JUDET']] == null){
+                  countyRate[product['JUDET']] = parseFloat(product['Rata somajului (%)  '])
+                }else{
+                  countyRate[product['JUDET']] += parseFloat(product['Rata somajului (%)  '])
+                }
+              }
           }
         }
       }
@@ -200,9 +217,10 @@ function colourCountries(field, month_min, month_max,  url){
       if(isBaseValue == false){
         var ratio = {}
         ratio = getRatio(data, countyUnempolyed, countyRate)
-        // console.log(data)
+        console.log(data)
         process_data(ratio, field, false);
       }else{
+        console.log(data)
         process_data(data, field, true);
       }
         
@@ -226,7 +244,7 @@ function getRatio(data, countyUnempolyed, countyRate){
 
 
 function process_data(data, field, flag){
-    // console.log(data)
+    console.log(data)
     var max = -Infinity;
     var min = Infinity;
     if(flag == false){
@@ -260,12 +278,10 @@ function process_data(data, field, flag){
 
 function updateLegend(step, minvalue, field, flag){
   var margin = 10
-  var flagDiv = 1
+  var prc = ""
   if(flag == false){
-    // step = step / 100
-    // minvalue = minvalue / 100
     margin = 1000
-    flagDiv = 100
+    prc = "%"
   }
   var legendfield = document.getElementById("legend0");
   legendfield.textContent = field;
@@ -275,13 +291,13 @@ function updateLegend(step, minvalue, field, flag){
     // legendbox.style.color = colors[index-1];
     
     if(index == 1){
-      legend.textContent = "< " + (Math.floor((minvalue + index * step) * 10) / margin).toString()
+      legend.textContent = "< " + (Math.floor((minvalue + index * step) * 10) / margin).toString() + prc
     }
       else if(index == 6){
-      legend.textContent = "> " + (Math.floor((minvalue +   index * step - step) * 10) / margin).toString() 
+      legend.textContent = "> " + (Math.floor((minvalue +   index * step - step) * 10) / margin).toString() + prc
       }
       else{
-      legend.textContent = (Math.floor(((minvalue + 1) + (index - 1) * step) * 10) / margin).toString() + " - " + (Math.floor((minvalue + index * step) * 10) / margin).toString()
+      legend.textContent = (Math.floor(((minvalue + 1) + (index - 1) * step) * 10) / margin).toString() + prc + " - " + (Math.floor((minvalue + index * step) * 10) / margin).toString()+ prc
       }
   }
 }
