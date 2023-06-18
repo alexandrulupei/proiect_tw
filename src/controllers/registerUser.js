@@ -59,7 +59,7 @@ async function registerUserController(req, res) {
             );
           } else if (User.validatePasswordFormat(password1) === null || password1 === undefined || password1 === '') {
             console.log(
-              "[user-controller] Password: 1 number, 1 uppercase, 1 lowercase and at least 8 from the mentioned characters!"
+              "[user-controller] Password: 1 number, 1 uppercase, 1 lowercase and at least 8!"
             );
             res.writeHead(200, { "Content-Type": "application/json" });
   
@@ -67,7 +67,7 @@ async function registerUserController(req, res) {
               JSON.stringify({
                 route: "/Register.html",
                 message:
-                  "Password: 1 number, 1 uppercase, 1 lowercase and at least 8 from the mentioned characters!",
+                  "Password: 1 number, 1 uppercase, 1 lowercase and at least 8!",
               })
             );
           } else if (password1 !== password2) {

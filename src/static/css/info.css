@@ -6,6 +6,9 @@ bodyinfo {
     padding: 0;
     color: #FFF;
     background: #FAFAFA;
+    position: fixed;
+    bottom: -10px;
+
   }
   
   h1info {
@@ -22,12 +25,12 @@ bodyinfo {
   
   eminfo {
     font-style: normal;
-    color: #FFC400;
+    color: #5c17aa;
   }
   
   ainfo {
     font-style: normal;
-    color: #FFD740;
+    color: #0b0d7a;
     text-decoration: none;
     padding-right: 10px;
     cursor: pointer;
@@ -45,7 +48,7 @@ bodyinfo {
     font-size: 25px;
     line-height: 35px;
     font-weight: bold;
-    /* -webkit-transform: rotate(0deg);
+    /* -webkit-transform: rotate(0deg); 
             transform: rotate(45deg); */
     -webkit-transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
@@ -54,7 +57,7 @@ bodyinfo {
 
    .containerinfo:hover  {
     transition: 30ms;
-    background-color:mediumSeaGreen;
+    background-color:rgb(57, 20, 169);
   }
   
   .expandinfo .buttoninfo {
@@ -68,8 +71,7 @@ bodyinfo {
     position: fixed;
     margin: auto;
     left: 0;
-    right: 0;
-    top: 5vh;
+    top: 0;
     background-color: gray;
     border-radius: 50%;
     width: 35px;
@@ -139,5 +141,5 @@ bodyinfo {
   .action-barinfo ainfo {
     text-transform: uppercase;
     line-height: 52px;
-    color: #FFC400;
+    color: #0008ff;
   }
