@@ -1,15 +1,13 @@
 const mongodb = require('mongodb')
+require("dotenv").config();
 const mongoClient = mongodb.MongoClient
 
 let _database
 
 const mongodbConnect = (callback) => {
-    // const config = new Config();
 
     mongoClient
-        .connect('mongodb+srv://admin:admin@atlascluster.vsdtg2f.mongodb.net/')
-        // `mongodb+srv://${config['db_username']}:${config['db_password']}@${config['db_host']}/${config['db']}?${config['db_options']}`)
-        // mongodb+srv://admin:admin@atlascluster.vsdtg2f.mongodb.net/
+        .connect("mongodb+srv://" + process.env.db_username + ":" + process.env.db_password + process.env.db_host)
         .then(client => {
             _database = client.db('informatii')
             console.log("[database] Connected to mongodb database!")

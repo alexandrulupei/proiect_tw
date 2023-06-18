@@ -112,6 +112,7 @@ h2{
     position: fixed;
     bottom: 0;
     width: 100%;
+    
 }
 
 /* Style the links inside the navigation bar */
@@ -124,6 +125,12 @@ h2{
     font-size: 17px;
     color: #151413;
     font-family: "Montserrat", sans-serif;
+}
+
+#logout1{
+  position: fixed;
+  bottom: 0px;
+  right: 0px; 
 }
 
 /* Change the color of links on hover */
