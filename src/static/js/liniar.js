@@ -48,6 +48,9 @@
   const id_varsta6 = "peste 55 ani"
 
   const arr_varsta = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5, id_varsta6];
+  const arr_tip = []
+  const arr_educatie = []
+  const arr_mediu = []
   //const varstaIterator = arr_varsta.values();
   
   // Educatie buttons ids
@@ -127,12 +130,31 @@
   var colors = ['#b9b9b9', '#ffa6a9','#cc6674', '#992038','#60000e', '#1a0105']
 
   var varstaFilds = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5, id_varsta6]
+  var mediuFilds = [id_mediu1, id_mediu1, id_mediu1, id_mediu1, id_mediu1, id_mediu1]
+  
+
+// toogle switch pentru alegerea graficului
+  // var checkInput = document.getElementById('check');
+  // var on = document.getElementsByClassName('on');
+  // var off = document.getElementsByClassName('off');
+
+  // checkInput.addEventListener("click", function(){
+  // if (checkInput.checked == true) {
+  //   on[0].style.color="black";
+  //   off[0].style.color="#253b52";
+  // } else {
+  // on[0].style.color="#253b52";
+  //   off[0].style.color="black";
+  // }
+  // })
   
   // slide range
   const rangeInput = document.querySelectorAll("input");
   
   // Varsta buttons
-  varsta.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/varsta", "graphic1")});
+  varsta.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/varsta", "graphic1")}); 
+  // educatie.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/educatie", "graphic1")});
+
   // Educatie submenu buttons
   
   // Mediu submenu buttons
@@ -145,13 +167,14 @@
   var bigData = {};
   var charts = {};
 
-  function full (month_min, month_max, url, graphicID){
-    setTimeout(() => {prepare(month_min, month_max, url);
-    createChart(graphicID);}, 1000);
+  function full (month_min, month_max, url, graphicID,){
+    // setTimeout(() => {prepare(month_min, month_max, url);
+    // createChart(graphicID);}, 1000);
+    prepare(month_min, month_max, url, graphicID);
   }
   
   
-  function prepare(month_min, month_max, url){
+  function prepare(month_min, month_max, url, graphicID){
 
     fetch(url, {
       method: 'GET',
@@ -174,16 +197,36 @@
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
           data = {};
-            if(product['JUDET'] != 'TOTAL' && (product['JUDET'] == judet1 || product['JUDET'] == judet2 || product['JUDET'] == judet3 || product['JUDET'] == judet3 || product['JUDET'] == judet4 || product['JUDET'] == judet5) && product['luna'] == month_min){
-                  for (var k = 0; k < arr_varsta.length; k++){
-                    if (product[arr_varsta[k]]){
-                      data[arr_varsta[k]] = parseInt(product[arr_varsta[k]]);
-                      }
-                  }
-                console.log(data);
-                bigData[product['JUDET']] = data;
-                
-        }
+          if(product['JUDET'] != 'TOTAL' && (product['JUDET'] == judet1 || product['JUDET'] == judet2 || product['JUDET'] == judet3 || product['JUDET'] == judet3 || product['JUDET'] == judet4 || product['JUDET'] == judet5) && product['luna'] == month_min)
+          {
+            //folosteste url pentru a gasi tipul
+
+            switch(url) {
+              case '/educatie':
+                // code block
+                break;
+              case '/varsta':
+                // code block
+                for (var k = 0; k < arr_varsta.length; k++){
+                  if (product[arr_varsta[k]]){ 
+                    data[arr_varsta[k]] = parseInt(product[arr_varsta[k]]);
+                    }
+                }
+                if (product[arr_varsta[0]]){
+                  // console.log(data);
+                  bigData[product['JUDET']] = data; //populezi data cu tipul cerut (varsta/educatie/mediu/tip)
+                }
+                break;
+              case '/mediu':
+                // code block
+                break;
+              case '/tip':
+                // code block
+                break;  
+              default:
+                // code block
+            }
+          }
         }
     }else{
         for(var i = 0; i < json.length; i++) {
@@ -205,124 +248,15 @@
 
       console.log("datele tale:")
          console.log(bigData)
+         createChart(graphicID, bigData);
         
     }).catch(err => {
       console.log(err)
     })
 }
 
-function prepareJson (bigData, judet) {
-  var count = 0;
-  
-for (const key in bigData) {
-  if (key == judet){
-  var jsonData = bigData[key];
-  //console.log("aici");
-  for (var i = 0; i < arr_varsta.length; i++) {
-  values[count] = jsonData[arr_varsta[i]];
-  count++;
-  }
-}
-}
-  console.log(values);
-    return values;
-}
-  
-  
-  /*------------------------- Range Slider -------------------------- */
-  
-  
-  // double range slider start
-  function collision($div1, $div2) {
-      var x1 = $div1.offset().left;
-      var w1 = 40;
-      var r1 = x1 + w1;
-      var x2 = $div2.offset().left;
-      var w2 = 40;
-      var r2 = x2 + w2;
-        
-      if (r1 < x2 || x1 > r2) return false;
-      return true;
-      
-    }
-  
-   
-    
-  // // slider call
-  
-  let minRangeValueGap = 0;
-  const range = document.getElementById("range_track");
-  const minval = document.querySelector(".minvalue");
-  const maxval = document.querySelector(".maxvalue");
-  // const rangeInput = document.querySelectorAll("input");
-  
-  let minRange, maxRange, minPercentage, maxPercentage;
-  
-  const minRangeFill = () => {
-    range.style.left = (rangeInput[0].value / rangeInput[0].max) * 100 + "%";
-  };
-  const maxRangeFill = () => {
-    range.style.right =
-      100 - (rangeInput[1].value / rangeInput[1].max) * 100 + "%";
-  };
-  const MinVlaueBubbleStyle = () => {
-    minPercentage = (minRange / rangeInput[0].max) * 100;
-    minval.style.left = minPercentage + "%";
-    minval.style.transform = `translate(-${minPercentage / 2}%, -100%)`;
-  };
-  const MaxVlaueBubbleStyle = () => {
-    maxPercentage = 100 - (maxRange / rangeInput[1].max) * 100;
-    maxval.style.right = maxPercentage + "%";
-    maxval.style.transform = `translate(${maxPercentage / 2}%, 100%)`;
-  };
-  
-  const setMinValueOutput = () => {
-    minRange = parseInt(rangeInput[0].value);
-    minval.innerHTML = rangeInput[0].value;
-  };
-  const setMaxValueOutput = () => {
-    maxRange = parseInt(rangeInput[1].value);
-    maxval.innerHTML = rangeInput[1].value;
-  };
-  
-  setMinValueOutput();
-  setMaxValueOutput();
-  minRangeFill();
-  maxRangeFill();
-  MinVlaueBubbleStyle();
-  MaxVlaueBubbleStyle();
-  
-  rangeInput.forEach((input) => {
-    input.addEventListener("input", (e) => {
-      setMinValueOutput();
-      setMaxValueOutput();
-  
-      minRangeFill();
-      maxRangeFill();
-  
-      MinVlaueBubbleStyle();
-      MaxVlaueBubbleStyle();
-  
-      if (maxRange - minRange < minRangeValueGap) {
-        if (e.target.className === "min") {
-          rangeInput[0].value = maxRange - minRangeValueGap;
-          setMinValueOutput();
-          minRangeFill();
-          MinVlaueBubbleStyle();
-          e.target.style.zIndex = "2";
-        } else {
-          rangeInput[1].value = minRange + minRangeValueGap;
-          e.target.style.zIndex = "2";
-          setMaxValueOutput();
-          maxRangeFill();
-          MaxVlaueBubbleStyle();
-        }
-      }
-    });
-  });
 
-
- function createChart(chartId){
+ function createChart(chartId, bigData){
   if (chartExists(chartId)){
     const valueExist = charts[chartId];
     valueExist.destroy()
@@ -332,24 +266,36 @@ for (const key in bigData) {
   var chart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: arr_varsta,
+          // labels: varstaFilds,
           datasets: [
               {
                   label: judet1,
-                  data: prepareJson(bigData, judet1),
+                  data: bigData[judet1],
                   borderColor: 'red',
                   fill: false
               },
               {
                 label: judet2,
-                data: prepareJson(bigData, judet2),
+                data: bigData[judet2],
                 borderColor: 'blue',
                 fill: false
               },
               {
                 label: judet3,
-                data: prepareJson(bigData, judet3),
+                data: bigData[judet3],
                 borderColor: 'green',
+                fill: false
+              },
+              {
+                label: judet4,
+                data: bigData[judet4],
+                borderColor: 'yellow',
+                fill: false
+              },
+              {
+                label: judet5,
+                data: bigData[judet5],
+                borderColor: 'black',
                 fill: false
               }
           ]
@@ -429,3 +375,102 @@ function chartExists(chartId) {
   
     // Multi select checkbox
   // double range slider end
+
+
+
+
+
+
+
+  
+  /*------------------------- Range Slider -------------------------- */
+  
+  
+  // double range slider start
+  function collision($div1, $div2) {
+    var x1 = $div1.offset().left;
+    var w1 = 40;
+    var r1 = x1 + w1;
+    var x2 = $div2.offset().left;
+    var w2 = 40;
+    var r2 = x2 + w2;
+      
+    if (r1 < x2 || x1 > r2) return false;
+    return true;
+    
+  }
+
+ 
+  
+// // slider call
+
+let minRangeValueGap = 0;
+const range = document.getElementById("range_track");
+const minval = document.querySelector(".minvalue");
+const maxval = document.querySelector(".maxvalue");
+// const rangeInput = document.querySelectorAll("input");
+
+let minRange, maxRange, minPercentage, maxPercentage;
+
+const minRangeFill = () => {
+  range.style.left = (rangeInput[0].value / rangeInput[0].max) * 100 + "%";
+};
+const maxRangeFill = () => {
+  range.style.right =
+    100 - (rangeInput[1].value / rangeInput[1].max) * 100 + "%";
+};
+const MinVlaueBubbleStyle = () => {
+  minPercentage = (minRange / rangeInput[0].max) * 100;
+  minval.style.left = minPercentage + "%";
+  minval.style.transform = `translate(-${minPercentage / 2}%, -100%)`;
+};
+const MaxVlaueBubbleStyle = () => {
+  maxPercentage = 100 - (maxRange / rangeInput[1].max) * 100;
+  maxval.style.right = maxPercentage + "%";
+  maxval.style.transform = `translate(${maxPercentage / 2}%, 100%)`;
+};
+
+const setMinValueOutput = () => {
+  minRange = parseInt(rangeInput[0].value);
+  minval.innerHTML = rangeInput[0].value;
+};
+const setMaxValueOutput = () => {
+  maxRange = parseInt(rangeInput[1].value);
+  maxval.innerHTML = rangeInput[1].value;
+};
+
+setMinValueOutput();
+setMaxValueOutput();
+minRangeFill();
+maxRangeFill();
+MinVlaueBubbleStyle();
+MaxVlaueBubbleStyle();
+
+rangeInput.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    setMinValueOutput();
+    setMaxValueOutput();
+
+    minRangeFill();
+    maxRangeFill();
+
+    MinVlaueBubbleStyle();
+    MaxVlaueBubbleStyle();
+
+    if (maxRange - minRange < minRangeValueGap) {
+      if (e.target.className === "min") {
+        rangeInput[0].value = maxRange - minRangeValueGap;
+        setMinValueOutput();
+        minRangeFill();
+        MinVlaueBubbleStyle();
+        e.target.style.zIndex = "2";
+      } else {
+        rangeInput[1].value = minRange + minRangeValueGap;
+        e.target.style.zIndex = "2";
+        setMaxValueOutput();
+        maxRangeFill();
+        MaxVlaueBubbleStyle();
+      }
+    }
+  });
+});
