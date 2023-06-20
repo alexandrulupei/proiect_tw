@@ -1,21 +1,21 @@
 
     // JavaScript code
     
-     document.getElementById("button1").addEventListener("click", function() {
-         toggleGraphic("graphic1");
-       });
+    //  document.getElementById("button1").addEventListener("click", function() {
+    //      toggleGraphic("graphic1");
+    //    });
   
-       document.getElementById("button2").addEventListener("click", function() {
-         toggleGraphic("graphic2");
-       });
+    //    document.getElementById("button2").addEventListener("click", function() {
+    //      toggleGraphic("graphic2");
+    //    });
   
-       document.getElementById("button3").addEventListener("click", function() {
-         toggleGraphic("graphic3");
-       });
+    //    document.getElementById("button3").addEventListener("click", function() {
+    //      toggleGraphic("graphic3");
+    //    });
   
-       document.getElementById("button4").addEventListener("click", function() {
-           toggleGraphic("graphic4");
-         });
+    //    document.getElementById("button4").addEventListener("click", function() {
+    //        toggleGraphic("graphic4");
+    //      });
   
   
       function toggleGraphic(id) {
@@ -37,7 +37,7 @@
   const judet5 = "SUCEAVA"
 
   const countyNames = [judet1, judet2, judet3, judet4, judet5];
-  const countyIterator = countyNames.values();
+  //const countyIterator = countyNames.values();
   
   // coloane tabel varsta 
   const id_varsta1 = "Sub 25 ani"
@@ -47,8 +47,8 @@
   const id_varsta5 = "50 - 55 ani"
   const id_varsta6 = "peste 55 ani"
 
-  const arr_varsta = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5];
-  const varstaIterator = arr_varsta.values();
+  const arr_varsta = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5, id_varsta6];
+  //const varstaIterator = arr_varsta.values();
   
   // Educatie buttons ids
   const id_educatie1 = "fara studii"
@@ -132,7 +132,7 @@
   const rangeInput = document.querySelectorAll("input");
   
   // Varsta buttons
-  varsta.addEventListener("click", function() { prepare(rangeInput[0].value, rangeInput[1].value ,  "/varsta")});
+  varsta.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/varsta", "graphic1")});
   // Educatie submenu buttons
   
   // Mediu submenu buttons
@@ -143,6 +143,13 @@
   const values = [];
   var data = {};
   var bigData = {};
+  var charts = {};
+
+  function full (month_min, month_max, url, graphicID){
+    setTimeout(() => {prepare(month_min, month_max, url);
+    createChart(graphicID);}, 1000);
+  }
+  
   
   function prepare(month_min, month_max, url){
 
@@ -166,20 +173,16 @@
 
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
-          
+          data = {};
             if(product['JUDET'] != 'TOTAL' && (product['JUDET'] == judet1 || product['JUDET'] == judet2 || product['JUDET'] == judet3 || product['JUDET'] == judet3 || product['JUDET'] == judet4 || product['JUDET'] == judet5) && product['luna'] == month_min){
-              for (const county of countyIterator){
-                if (product[county] != null){
-                  console.log("aici");
-                  for (const value of varstaIterator){
-                    if (product[value]){
-                      data[value] = parseInt(product[value]);
-                      
-                }
-              }
-              bigData[county] = data;
-            }            
-          } 
+                  for (var k = 0; k < arr_varsta.length; k++){
+                    if (product[arr_varsta[k]]){
+                      data[arr_varsta[k]] = parseInt(product[arr_varsta[k]]);
+                      }
+                  }
+                console.log(data);
+                bigData[product['JUDET']] = data;
+                
         }
         }
     }else{
@@ -198,37 +201,30 @@
         }
       }
 
+
+
       console.log("datele tale:")
          console.log(bigData)
-
         
     }).catch(err => {
       console.log(err)
     })
 }
 
-function prepareJson (data, field1) {
-for (var i = 0; i < data.length; i++) {
-  var product = data[i];
-  if (data[product['JUDET'] == field1]){
-  var jsonData = data[i];
- console.log(`Data for county ${i + 1}:`);
+function prepareJson (bigData, judet) {
+  var count = 0;
   
-  // Convert JSON data to string
-  var jsonString = JSON.stringify(jsonData);
-  
-  // Split the string into separate lines (optional)
-  var lines = jsonString.split('\n');
-  
-  // Output the individual lines
-  for (var j = 0; j < lines.length; j++) {
-    var myArray = lines[j].split(':');
-    values[j] = myArray[1].parseInt;
+for (const key in bigData) {
+  if (key == judet){
+  var jsonData = bigData[key];
+  //console.log("aici");
+  for (var i = 0; i < arr_varsta.length; i++) {
+  values[count] = jsonData[arr_varsta[i]];
+  count++;
   }
-  console.log("sunt aici")
+}
+}
   console.log(values);
-}
-}
     return values;
 }
   
@@ -326,8 +322,13 @@ for (var i = 0; i < data.length; i++) {
   });
 
 
- 
-  var ctx = document.getElementById('graphic1').getContext('2d');
+ function createChart(chartId){
+  if (chartExists(chartId)){
+    const valueExist = charts[chartId];
+    valueExist.destroy()
+  };
+
+  var ctx = document.getElementById(chartId).getContext('2d');
   var chart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -335,19 +336,19 @@ for (var i = 0; i < data.length; i++) {
           datasets: [
               {
                   label: judet1,
-                  data: prepareJson(data, judet1),
+                  data: prepareJson(bigData, judet1),
                   borderColor: 'red',
                   fill: false
               },
               {
                 label: judet2,
-                data: prepareJson(data, judet2),
+                data: prepareJson(bigData, judet2),
                 borderColor: 'blue',
                 fill: false
               },
               {
                 label: judet3,
-                data: prepareJson(data, judet3),
+                data: prepareJson(bigData, judet3),
                 borderColor: 'green',
                 fill: false
               }
@@ -357,10 +358,18 @@ for (var i = 0; i < data.length; i++) {
           // Configuration options for the line graph
       }
   });
+  
+  charts[chartId] = chart;
+  
+}
+
+function chartExists(chartId) {
+  return charts.hasOwnProperty(chartId);
+}
 
 
-  var ctx = document.getElementById('graphic2').getContext('2d');
-  var chart = new Chart(ctx, {
+  var ctx1 = document.getElementById('graphic2').getContext('2d');
+  var chart1 = new Chart(ctx1, {
       type: 'line',
       data: {
           labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
@@ -378,8 +387,8 @@ for (var i = 0; i < data.length; i++) {
       }
   });
 
-  var ctx = document.getElementById('graphic3').getContext('2d');
-  var chart = new Chart(ctx, {
+  var ctx2 = document.getElementById('graphic3').getContext('2d');
+  var chart2 = new Chart(ctx2, {
       type: 'line',
       data: {
           labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
@@ -397,8 +406,8 @@ for (var i = 0; i < data.length; i++) {
       }
   });
 
-  var ctx = document.getElementById('graphic4').getContext('2d');
-  var chart = new Chart(ctx, {
+  var ctx3 = document.getElementById('graphic4').getContext('2d');
+  var chart3 = new Chart(ctx3, {
       type: 'line',
       data: {
           labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
