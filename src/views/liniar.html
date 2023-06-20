@@ -5,7 +5,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
-        <link rel="stylesheet" type="text/css" href="../static/css/main.css" /> 
+        <link rel="stylesheet" type="text/css" href="../static/css/liniar.css" /> 
+        <script type='module' src="../static/js/liniar.js"></script>
+        
     </head>
     <body>
        <h1>
@@ -13,11 +15,90 @@
 
        </h1>
 
+       <!-- slider -->
+       <div style = "position:absolute; left:810px; top:70px; " > 
+        
+        <div class="double_range_slider_box">
+          <div class="double_range_slider">
+            <span class="range_track" id="range_track"></span>
+      
+            <input type="range" class="min" min="1" max="12" value="1" step="1">
+            <input type="range" class="max" min="0" max="12" value="2" step="1">
+      
+            <div class="minvalue"></div>
+            <div class="maxvalue"></div>
+          </div>
+          <!-- <script type='module' src="../static/js/cartografic.js"></script> -->
+        </div>
 
+        <!-- mediu si submeniu -->
+
+        
+        <div class="dropdown">
+            <button class="button" id="button1">Varsta</button>
+        </div>
+        <div class="dropdown">
+            <button class="button" id="button2">Totală şi pe sexe</button>
+        </div>
+        <div class="dropdown">
+            <button class="button" id="button3">Nivel educatie</button>
+        </div>
+        <div class="dropdown">
+            <button class="button" id="button4">Mediu Urban/Rural</button>
+        </div>
+
+       </div>
+
+
+       <div class="multiselect" style="position:absolute; left:550px; top:100px">
+        <div class="selectBox" onclick="showCheckboxes()">
+          <select>
+            <option>Select an option</option>
+          </select>
+          <div class="overSelect"></div>
+        </div>
+        <div id="checkboxes">
+          <label for="option1">
+            <input type="checkbox" id="option1" />Option 1</label>
+          <label for="option2">
+            <input type="checkbox" id="option2" />Option 2</label>
+          <label for="option3">
+            <input type="checkbox" id="option3" />Option 3</label>
+          <label for="option4">
+            <input type="checkbox" id="option4" />Option 4</label>
+          <label for="option5">
+            <input type="checkbox" id="option5" />Option 5</label>
+        </div>
+      </div>
+
+<!-- graphs -->   
+
+<div class="graphic" style="position:absolute; left:70px; top: 50px">
+    <canvas id="graphic1"></canvas>
+</div>
+
+<div class="graphic" style="position:absolute; left:70px; top: 300px">
+    <canvas id="graphic2"></canvas>
+</div>
+
+<div class="graphic" style="position:absolute; left:70px; top: 600px">
+    <canvas id="graphic3"></canvas>
+</div>
+
+<div class="graphic" style="position:absolute; left:70px; top: 900px">
+    <canvas id="graphic4"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../static/js/liniarscript.js"></script>
         <div class="navbar">
             <a href="./home.html" class="active">Home</a>
             <a href="#news">News</a>
             <a href="./contact.html">Contact</a>
           </div>
+
+          <script>
+           
+        </script>
     </body>
 </html>

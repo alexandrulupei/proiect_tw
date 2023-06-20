@@ -532,3 +532,4 @@ rangeInput.forEach((input) => {
   });
 });
 // double range slider end
+

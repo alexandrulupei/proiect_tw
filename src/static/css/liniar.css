@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+* {
+margin: 0;
+padding: 0;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+body {
+color: #f6f4e6;
+background: #262626;
+font-family: "Montserrat", sans-serif;
+}
+h1{
+color: #f6f4e6;
+font-family: "Montserrat", sans-serif;
+position: absolute;
+text-align: center; 
+top: 0;
+left: 35%;
+}
+/*  */
+
+.navbar {
+background-color: #333;
+overflow: hidden;
+position: fixed;
+bottom: 0;
+width: 100%;
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+float: left;
+display: block;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+font-size: 17px;
+color: #f6f4e6;
+font-family: "Montserrat", sans-serif;
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
+color: #fddb3a;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: gray;
+    color: white;
+    text-align: right;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    }
+    
+    .dropdown{
+        display:inline-block; 
+        position:relative;
+      }
+    
+      .dropdown button{
+        border:none;
+        padding:8px 16px;
+        background-color:gray;
+        color:#fff;
+        transition:.3s;
+        cursor:pointer;
+      }
+      
+      .dropdown:hover button{
+        background-color:mediumSeaGreen;
+      }
+      .dropdown:hover{
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+      
+      /* double  range slider */
+    
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+    
+    
+    
+      .double_range_slider_box {
+        position: relative;
+        width: 615px;
+        height: 120px;
+        background: #262626;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+      }
+    
+      .double_range_slider {
+        width: 90%;
+        height: 10px;
+        position: relative;
+        background-color: #dddddd;
+        border-radius: 20px;
+      }
+      .range_track {
+        height: 100%;
+        position: absolute;
+        border-radius: 20px;
+        background-color: #95d564;
+      }
+    
+      input {
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        background: none;
+        pointer-events: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      input::-webkit-slider-thumb {
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        border: 3px solid #cbffa3;
+        background-color: #95d564;
+        pointer-events: auto;
+        -webkit-appearance: none;
+        cursor: pointer;
+        margin-bottom: 1px;
+      }
+      input::-moz-range-thumb {
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        border: 3px solid #cbffa3;
+        background-color: #95d564;
+        pointer-events: auto;
+        -moz-appearance: none;
+        cursor: pointer;
+        margin-top: 30%;
+      }
+    
+      .minvalue {
+        position: absolute;
+        padding: 6px 15px;
+        background: #0e5f59;
+        border-radius: 1rem;
+        color: white;
+        bottom: 0;
+        transform: translate(0, -100%);
+        left: 0;
+        font-size: 1rem;
+        transition: left 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        will-change: left, transform;
+      }
+      .maxvalue {
+        position: absolute;
+        padding: 6px 15px;
+        background: #0e5f59;
+        border-radius: 1rem;
+        color: white;
+        top: 0;
+        transform: translate(0, 100%);
+        right: 0;
+        font-size: 1rem;
+        transition: right 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        will-change: right, transform;
+      }
+    
+    /* end double range slider */
+
+    /* graphs*/
+
+    .graphic {
+        width: 400px;
+        height: 301px;
+    }
+     
+    .multiselect {
+        width: 200px;
+      }
+      
+      .selectBox {
+        position: relative;
+      }
+      
+      .selectBox select {
+        width: 100%;
+        font-weight: bold;
+      }
+      
+      .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+      
+      #checkboxes {
+        display: none;
+        border: 1px solid #ccc;
+      }
+      
+      #checkboxes label {
+        display: block;
+      }
+      
+      #checkboxes label:hover {
+        background-color: #1e90ff;
+        color: #fff;
+      }
+      
+      #checkboxes input[type="checkbox"] {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }

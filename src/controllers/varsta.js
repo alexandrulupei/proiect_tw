@@ -8,7 +8,7 @@ async function varstaController(req, res){
         res.writeHead(200, { "Content-Type": "application/json" });
         
         res.end(JSON.stringify(products));
-        console.log(products)
+        //console.log(products)
 
       } catch (err) {
         console.log(err);
