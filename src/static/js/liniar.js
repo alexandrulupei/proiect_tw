@@ -29,6 +29,9 @@
   
       // Varsta buttons ids
   const id_varsta = "button1"
+  const id_tip = "button2"
+  const id_educatie = "button3"
+  const id_mediu = "button4"
 
   const judet1 = "GALATI"
   const judet2 = "BRAILA"
@@ -37,7 +40,7 @@
   const judet5 = "SUCEAVA"
 
   const countyNames = [judet1, judet2, judet3, judet4, judet5];
-  //const countyIterator = countyNames.values();
+
   
   // coloane tabel varsta 
   const id_varsta1 = "Sub 25 ani"
@@ -48,11 +51,8 @@
   const id_varsta6 = "peste 55 ani"
 
   const arr_varsta = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5, id_varsta6];
-  const arr_tip = []
-  const arr_educatie = []
-  const arr_mediu = []
-  //const varstaIterator = arr_varsta.values();
-  
+
+
   // Educatie buttons ids
   const id_educatie1 = "fara studii"
   const id_educatie2 = "invatamant primar "
@@ -62,6 +62,8 @@
   const id_educatie6 = "invatamant profesional/arte si meserii"
   const id_educatie7 = "invatamant universitar"
   const id_educatie8 = "Total someri, din care: "
+
+  const arr_educatie = [id_educatie1, id_educatie2, id_educatie3, id_educatie4, id_educatie5, id_educatie6, id_educatie7, id_educatie8];
   
   // Mediu buttons ids
   const id_mediu1 = "NUMAR TOTAL SOMERI "
@@ -73,6 +75,8 @@
   const id_mediu7 = "NUMAR SOMERI BARBATI DIN MEDIUL RURAL "
   const id_mediu8 = "NUMAR TOTAL SOMERI FEMEI  "
   const id_mediu9 = "NUMAR TOTAL SOMERI BARBATI "
+
+  const arr_mediu = [id_mediu1, id_mediu2, id_mediu3, id_mediu4, id_mediu5, id_mediu6, id_mediu7, id_mediu8, id_mediu9];
   
   // Tip buttons ids
   const id_tip1 = "Numar total someri "
@@ -83,6 +87,8 @@
   const id_tip6 = "Rata somajului (%)  "
   const id_tip7 = "Rata somajului Feminina (%)  "
   const id_tip8 = "Rata somajului Masculina (%)  "
+
+  const arr_tip = [id_tip1, id_tip2, id_tip3, id_tip4, id_tip5, id_tip6, id_tip7, id_tip8];
   
   // Tip buttons 
   var tip1 = document.getElementById(id_tip1);
@@ -96,6 +102,9 @@
   
   // Varsta buttons 
   var varsta = document.getElementById(id_varsta);
+  var tip = document.getElementById(id_tip);
+  var educatie = document.getElementById(id_educatie);
+  var mediu = document.getElementById(id_mediu);
   
   // Educatie buttons 
   var educatie1 = document.getElementById(id_educatie1);
@@ -153,7 +162,9 @@
   
   // Varsta buttons
   varsta.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/varsta", "graphic1")}); 
-  // educatie.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/educatie", "graphic1")});
+  tip.addEventListener ("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/tip", "graphic2")})
+  educatie.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/educatie", "graphic3")});
+  mediu.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/mediu", "graphic4")});
 
   // Educatie submenu buttons
   
@@ -163,8 +174,7 @@
   
   
   const values = [];
-  var data = {};
-  var bigData = {};
+  
   var charts = {};
 
   function full (month_min, month_max, url, graphicID,){
@@ -190,7 +200,8 @@
     
       // Loop through each data
        console.log(json)
-      
+       var data = {};
+       var bigData = {};
 
       if(month_min == month_max){
 
@@ -203,10 +214,18 @@
 
             switch(url) {
               case '/educatie':
-                // code block
+                for (var k = 0; k < arr_educatie.length; k++){
+                  if (product[arr_educatie[k]]){ 
+                    data[arr_educatie[k]] = parseInt(product[arr_educatie[k]]);
+                    }
+                }
+                if (product[arr_educatie[0]]){
+                  // console.log(data);
+                  bigData[product['JUDET']] = data;
                 break;
+                }
+
               case '/varsta':
-                // code block
                 for (var k = 0; k < arr_varsta.length; k++){
                   if (product[arr_varsta[k]]){ 
                     data[arr_varsta[k]] = parseInt(product[arr_varsta[k]]);
@@ -214,34 +233,132 @@
                 }
                 if (product[arr_varsta[0]]){
                   // console.log(data);
-                  bigData[product['JUDET']] = data; //populezi data cu tipul cerut (varsta/educatie/mediu/tip)
+                  bigData[product['JUDET']] = data; 
                 }
                 break;
+
               case '/mediu':
-                // code block
+                for (var k = 0; k < arr_mediu.length; k++){
+                  if (product[arr_mediu[k]]){ 
+                    data[arr_mediu[k]] = parseInt(product[arr_mediu[k]]);
+                    }
+                }
+                if (product[arr_mediu[0]]){
+                  // console.log(data);
+                  bigData[product['JUDET']] = data;
                 break;
+                }
+
               case '/tip':
-                // code block
-                break;  
+                for (var k = 0; k < arr_tip.length; k++){
+                  if (product[arr_tip[k]]){ 
+                    data[arr_tip[k]] = parseInt(product[arr_tip[k]]);
+                    }
+                }
+                if (product[arr_tip[0]]){
+                  bigData[product['JUDET']] = data;
+                break; 
+                } 
               default:
-                // code block
+                console.log("default")
             }
           }
         }
     }else{
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
+          data = {};
           if(product['JUDET'] != 'TOTAL' && (product['JUDET'] == judet1 || product['JUDET'] == judet2 || product['JUDET'] == judet3 || product['JUDET'] == judet3 || product['JUDET'] == judet4 || product['JUDET'] == judet5) && product['luna'] == month_min){
-              if(product[field]){
-                if(data[product['JUDET']] == null){
-                  data[product['JUDET']] = parseInt(product[field]); //TO DO creeaza o lista pentri fields prin care sa iterezi si adauga in data 
+            switch(url) {
+              case '/educatie':
+                for (var k = 0; k < arr_educatie.length; k++){
+                  if (product[arr_educatie[k]]){ 
+                    if(bigData[product['JUDET']] == null){
+                      data[arr_educatie[k]] = parseInt(product[arr_educatie[k]]);
+                    }
+                    else{
+                      data[arr_educatie[k]] += parseInt(product[arr_educatie[k]]);
+                    }
+                  }
                 }
-                else{
-                  data[product['JUDET']] += parseInt(product[field]);
+                if (product[arr_educatie[0]]){
+                  // console.log(data);
+                    for(var l = 0; l < arr_educatie.length; l++){
+                      if(bigData[product['JUDET'[arr_educatie[l]]]] == null){
+                        bigData[product['JUDET'[arr_educatie[l]]]] = data[arr_educatie[l]];
+                      }
+                      else{
+                        bigData[product['JUDET'[arr_educatie[l]]]] += data[arr_educatie[l]];
+                      }
+                    }
                 }
+                break;
+
+              case '/varsta':
+                for (var k = 0; k < arr_varsta.length; k++){
+                  if (product[arr_varsta[k]]){ 
+                    if(data[arr_varsta[k]] == null){
+                      data[arr_varsta[k]] = parseInt(product[arr_varsta[k]]);
+                    }
+                    else{
+                      data[arr_varsta[k]] += parseInt(product[arr_varsta[k]]);
+                    }
+                  }
+                }
+                if (product[arr_varsta[0]]){
+                  console.log("varsta")
+                  console.log(url);
+                  bigData[product['JUDET']] = data;
+                
+                }
+                break;
+              case '/mediu':
+                for (var k = 0; k < arr_mediu.length; k++){
+                  if (product[arr_mediu[k]]){ 
+                    if(data[arr_mediu[k]] == null){
+                      data[arr_mediu[k]] = parseInt(product[arr_mediu[k]]);
+                    }
+                    else{
+                      data[arr_mediu[k]] += parseInt(product[arr_mediu[k]]);
+                    }
+                  }
+                }
+                if (product[arr_mediu[0]]){
+                  // console.log(data);
+                  bigData[product['JUDET']] = data;
+                
+                }
+                break;
+              case '/tip':
+                for (var k = 0; k < arr_tip.length; k++){
+                  if (product[arr_tip[k]]){ 
+                    if(data[arr_tip[k]] == null){
+                      data[arr_tip[k]] = parseInt(product[arr_tip[k]]);
+                    }
+                    else{
+                      data[arr_tip[k]] += parseInt(product[arr_tip[k]]);
+                    }
+                  }
+                }
+                if (product[arr_tip[0]]){
+                   console.log("in tip");
+                   console.log(url);
+                  bigData[product['JUDET']] = data;
+                
+                }
+                break;
+              default:
+                console.log("default")
+            }
+                // if(data[product['JUDET']] == null){
+                //   data[product['JUDET']] = parseInt(product[field]); //TO DO creeaza o lista pentri fields prin care sa iterezi si adauga in data 
+                // }
+                // else{
+                //   data[product['JUDET']] += parseInt(product[field]);
+                // }
               } 
           }
-        }
+        
       }
 
 
@@ -314,62 +431,62 @@ function chartExists(chartId) {
 }
 
 
-  var ctx1 = document.getElementById('graphic2').getContext('2d');
-  var chart1 = new Chart(ctx1, {
-      type: 'line',
-      data: {
-          labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
-          datasets: [
-              {
-                  label: 'Vasrta',
-                  data: [1456, 2054, 3001, 2345, 3214, 2111],
-                  borderColor: 'rgba(255, 99, 132, 1)',
-                  fill: false
-              }
-          ]
-      },
-      options: {
-          // Configuration options for the line graph
-      }
-  });
+  // var ctx1 = document.getElementById('graphic2').getContext('2d');
+  // var chart1 = new Chart(ctx1, {
+  //     type: 'line',
+  //     data: {
+  //         labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
+  //         datasets: [
+  //             {
+  //                 label: 'Vasrta',
+  //                 data: [1456, 2054, 3001, 2345, 3214, 2111],
+  //                 borderColor: 'rgba(255, 99, 132, 1)',
+  //                 fill: false
+  //             }
+  //         ]
+  //     },
+  //     options: {
+  //         // Configuration options for the line graph
+  //     }
+  // });
 
-  var ctx2 = document.getElementById('graphic3').getContext('2d');
-  var chart2 = new Chart(ctx2, {
-      type: 'line',
-      data: {
-          labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
-          datasets: [
-              {
-                  label: 'Vasrta',
-                  data: [1456, 2054, 3001, 2345, 3214, 2111],
-                  borderColor: 'rgba(255, 99, 132, 1)',
-                  fill: false
-              }
-          ]
-      },
-      options: {
-          // Configuration options for the line graph
-      }
-  });
+  // var ctx2 = document.getElementById('graphic3').getContext('2d');
+  // var chart2 = new Chart(ctx2, {
+  //     type: 'line',
+  //     data: {
+  //         labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
+  //         datasets: [
+  //             {
+  //                 label: 'Vasrta',
+  //                 data: [1456, 2054, 3001, 2345, 3214, 2111],
+  //                 borderColor: 'rgba(255, 99, 132, 1)',
+  //                 fill: false
+  //             }
+  //         ]
+  //     },
+  //     options: {
+  //         // Configuration options for the line graph
+  //     }
+  // });
 
-  var ctx3 = document.getElementById('graphic4').getContext('2d');
-  var chart3 = new Chart(ctx3, {
-      type: 'line',
-      data: {
-          labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
-          datasets: [
-              {
-                  label: 'Vasrta',
-                  data: [1456, 2054, 3001, 2345, 3214, 2111],
-                  borderColor: 'rgba(255, 99, 132, 1)',
-                  fill: false
-              }
-          ]
-      },
-      options: {
-          // Configuration options for the line graph
-      }
-  });
+  // var ctx3 = document.getElementById('graphic4').getContext('2d');
+  // var chart3 = new Chart(ctx3, {
+  //     type: 'line',
+  //     data: {
+  //         labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
+  //         datasets: [
+  //             {
+  //                 label: 'Vasrta',
+  //                 data: [1456, 2054, 3001, 2345, 3214, 2111],
+  //                 borderColor: 'rgba(255, 99, 132, 1)',
+  //                 fill: false
+  //             }
+  //         ]
+  //     },
+  //     options: {
+  //         // Configuration options for the line graph
+  //     }
+  // });
 
 
   
