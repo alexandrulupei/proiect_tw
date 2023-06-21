@@ -5,7 +5,13 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
         <link rel="stylesheet" type="text/css" href="../static/css/liniar.css" /> 
+        <link rel="stylesheet" type="text/css" href="../static/css/menu.css" /> 
+        <link rel="stylesheet" type="text/css" href="../static/css/toogleSwtitch.css" /> 
+
+
         <script type='module' src="../static/js/liniar.js"></script>
         
     </head>
@@ -31,6 +37,16 @@
           <!-- <script type='module' src="../static/js/cartografic.js"></script> -->
         </div>
 
+        <!-- toggle switch -->
+        <div class="containerswitch">
+          <div class="off">Top graph</div>
+          <label class="switch">
+            <input id="check" type="checkbox">
+            <span class="toggle"></span>
+          </label>
+          <div class="on">Bottom graph</div>
+          </div>
+
         <!-- mediu si submeniu -->
 
         
@@ -49,27 +65,60 @@
 
        </div>
 
+         <!-- selector -->
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+       
+       <div class="container">
 
-       <div class="multiselect" style="position:absolute; left:550px; top:100px">
-        <div class="selectBox" onclick="showCheckboxes()">
-          <select>
-            <option>Select an option</option>
-          </select>
-          <div class="overSelect"></div>
-        </div>
-        <div id="checkboxes">
-          <label for="option1">
-            <input type="checkbox" id="option1" />Option 1</label>
-          <label for="option2">
-            <input type="checkbox" id="option2" />Option 2</label>
-          <label for="option3">
-            <input type="checkbox" id="option3" />Option 3</label>
-          <label for="option4">
-            <input type="checkbox" id="option4" />Option 4</label>
-          <label for="option5">
-            <input type="checkbox" id="option5" />Option 5</label>
-        </div>
-      </div>
+       <select id='selector' class="selectpicker" data-style="btn-primary" multiple data-max-options="5">
+          <option value="1">ALBA</option>
+          <option value="2">ARAD</option>
+          <option value="3">ARGES</option>
+          <option value="4">BACAU</option>
+          <option value="5">BIHOR</option>
+          <option value="6">BISTRITA NASAUD</option>
+          <option value="7">BOTOSANI</option>
+          <option value="8">BRAILA</option>
+          <option value="9">BRASOV</option>
+          <option value="10">BUCURESTI</option>
+          <option value="11">BUZAU</option>
+          <option value="12">CALARASI</option>
+          <option value="13">CARAS-SEVERIN</option>
+          <option value="14">CLUJ</option>
+          <option value="15">CONSTANTA</option>
+          <option value="16">COVASNA</option>
+          <option value="17">DAMBOVITA</option>
+          <option value="18">DOLJ</option>
+          <option value="19">GALATI</option>
+          <option value="20">GIURGIU</option>
+          <option value="21">GORJ</option>
+          <option value="22">HARGHITA</option>
+          <option value="23">HUNEDOARA</option>
+          <option value="24">IALOMITA</option>
+          <option value="25">IASI</option>
+          <option value="26">ILFOV</option>
+          <option value="27">MARAMURES</option>
+          <option value="28">MEHEDINTI</option>
+          <option value="29">MURES</option>
+          <option value="30">NEAMT</option>
+          <option value="31">OLT</option>
+          <option value="32">PRAHOVA</option>
+          <option value="33">SATU MARE</option>
+          <option value="34">SALAJ</option>
+          <option value="35">SIBIU</option>
+          <option value="36">SUCEAVA</option>
+          <option value="37">TELEORMAN</option>
+          <option value="38">TIMIS</option>
+          <option value="39">TULCEA</option>
+          <option value="40">VALCEA</option>
+          <option value="41">VASLUI</option>
+          <option value="42">VRANCEA</option>
+         </select>
+        
+       </div>
+
 
 <!-- graphs -->   
 
@@ -77,23 +126,14 @@
     <canvas id="graphic1"></canvas>
 </div>
 
-<div class="graphic" style="position:absolute; left:70px; top: 300px">
+<div class="graphic" style="position:absolute; left:70px; top: 320px">
     <canvas id="graphic2"></canvas>
-</div>
-
-<div class="graphic" style="position:absolute; left:70px; top: 600px">
-    <canvas id="graphic3"></canvas>
-</div>
-
-<div class="graphic" style="position:absolute; left:70px; top: 900px">
-    <canvas id="graphic4"></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../static/js/liniarscript.js"></script>
         <div class="navbar">
             <a href="./home.html" class="active">Home</a>
-            <a href="#news">News</a>
             <a href="./contact.html">Contact</a>
           </div>
 

@@ -5,14 +5,14 @@ h2 {
     font-size: 30px;
   }
   
-  .container {
+  .containerswitch {
     display: flex;
     margin-bottom: 5px;
     width: 400px;
     align-items: center;
   }
   
-  .container div {
+  .containerswitch div {
     margin: 20px;
   }
   

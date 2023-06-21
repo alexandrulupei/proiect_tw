@@ -1,33 +1,4 @@
-
-    // JavaScript code
-    
-    //  document.getElementById("button1").addEventListener("click", function() {
-    //      toggleGraphic("graphic1");
-    //    });
-  
-    //    document.getElementById("button2").addEventListener("click", function() {
-    //      toggleGraphic("graphic2");
-    //    });
-  
-    //    document.getElementById("button3").addEventListener("click", function() {
-    //      toggleGraphic("graphic3");
-    //    });
-  
-    //    document.getElementById("button4").addEventListener("click", function() {
-    //        toggleGraphic("graphic4");
-    //      });
-  
-  
-      function toggleGraphic(id) {
-        var graphic = document.getElementById(id);
-        if (graphic.style.display === "none") {
-          graphic.style.display = "block";
-        } else {
-          graphic.style.display = "none";
-        }
-      }
-  
-      // Varsta buttons ids
+ // Varsta buttons ids
   const id_varsta = "button1"
   const id_tip = "button2"
   const id_educatie = "button3"
@@ -39,9 +10,9 @@
   const judet4 = "IASI"
   const judet5 = "SUCEAVA"
 
-  const countyNames = [judet1, judet2, judet3, judet4, judet5];
-
   
+
+  const countyNames = [judet1, judet2, judet3, judet4, judet5];
   // coloane tabel varsta 
   const id_varsta1 = "Sub 25 ani"
   const id_varsta2 = "25 - 29 ani"
@@ -140,51 +111,68 @@
 
   var varstaFilds = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5, id_varsta6]
   var mediuFilds = [id_mediu1, id_mediu1, id_mediu1, id_mediu1, id_mediu1, id_mediu1]
-  
 
-// toogle switch pentru alegerea graficului
-  // var checkInput = document.getElementById('check');
-  // var on = document.getElementsByClassName('on');
-  // var off = document.getElementsByClassName('off');
-
-  // checkInput.addEventListener("click", function(){
-  // if (checkInput.checked == true) {
-  //   on[0].style.color="black";
-  //   off[0].style.color="#253b52";
-  // } else {
-  // on[0].style.color="#253b52";
-  //   off[0].style.color="black";
-  // }
-  // })
   
   // slide range
   const rangeInput = document.querySelectorAll("input");
-  
-  // Varsta buttons
-  varsta.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/varsta", "graphic1")}); 
-  tip.addEventListener ("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/tip", "graphic2")})
-  educatie.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/educatie", "graphic3")});
-  mediu.addEventListener("click", function() { full(rangeInput[0].value, rangeInput[1].value ,  "/mediu", "graphic4")});
 
-  // Educatie submenu buttons
+  var checkInput = document.getElementById('check');
+  var on = document.getElementsByClassName('on');
+  var off = document.getElementsByClassName('off');
+
+  checkInput.addEventListener("click", function(){
+  if (checkInput.checked == true) {
+    on[0].style.color="black";
+    off[0].style.color="#253b52";
+  } else {
+  on[0].style.color="#253b52";
+    off[0].style.color="black";
+  }
+  })
   
-  // Mediu submenu buttons
-  
-  // Tip submenu buttons
-  
-  
+  function getGraphicId(){
+    if (checkInput.checked != true) {
+      return "graphic1"
+    } else {
+      return "graphic2"
+    }
+  }
+
+  // Varsta buttons
+  varsta.addEventListener("click", function() {full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/varsta", getGraphicId())}); 
+  tip.addEventListener ("click", function() { full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/tip", getGraphicId())})
+  educatie.addEventListener("click", function() { full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/educatie", getGraphicId())});
+  mediu.addEventListener("click", function() { full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/mediu", getGraphicId())});
+
+function getSelectedCounties(){
+  const county = ['ALBA', 'ARAD', 'ARGES', 'BACAU', 'BIHOR', 'BISTRITA NASAUD', 'BOTOSANI', 'BRAILA', 'BRASOV',
+    'BUZAU', 'CALARASI', 'CARAS-SEVERIN', 'CLUJ', 'CONSTANTA', 'COVASNA', 
+    'DAMBOVITA', 'DOLJ', 'GALATI', 'GIURGIU', 'GORJ', 'HARGHITA', 'HUNEDOARA', 'IALOMITA', 'IASI', 'ILFOV', 
+    'MARAMURES', 'MEHEDINTI', 'BUCURESTI', 'MURES', 'NEAMT', 'OLT', 'PRAHOVA', 
+    'SALAJ', 'SATU MARE', 'SIBIU', 'SUCEAVA', 'TELEORMAN', 'TIMIS', 'TULCEA', 'VALCEA', 'VASLUI', 'VRANCEA']
+  var selected = []
+  var selector = document.getElementById("selector");
+  for(var i = 0; i<42; i++){
+    var option = selector.options[i];
+
+    if (option.selected) {
+      console.log(county[i]);
+      selected.push(county[i])
+    } 
+  }
+  return selected;
+}
+
   const values = [];
   
   var charts = {};
 
-  function full (month_min, month_max, url, graphicID,){
-    // setTimeout(() => {prepare(month_min, month_max, url);
-    // createChart(graphicID);}, 1000);
-    prepare(month_min, month_max, url, graphicID);
+  function full (counties, month_min, month_max, url, graphicID,){
+    prepare(counties, month_min, month_max, url, graphicID);
   }
   
   
-  function prepare(month_min, month_max, url, graphicID){
+  function prepare(counties, month_min, month_max, url, graphicID){
 
     fetch(url, {
       method: 'GET',
@@ -208,7 +196,7 @@
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
           data = {};
-          if(product['JUDET'] != 'TOTAL' && (product['JUDET'] == judet1 || product['JUDET'] == judet2 || product['JUDET'] == judet3 || product['JUDET'] == judet3 || product['JUDET'] == judet4 || product['JUDET'] == judet5) && product['luna'] == month_min)
+          if(product['JUDET'] != 'TOTAL' && counties.includes(product['JUDET']) && product['luna'] == month_min)
           {
             //folosteste url pentru a gasi tipul
 
@@ -268,12 +256,12 @@
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
           data = {};
-          if(product['JUDET'] != 'TOTAL' && (product['JUDET'] == judet1 || product['JUDET'] == judet2 || product['JUDET'] == judet3 || product['JUDET'] == judet3 || product['JUDET'] == judet4 || product['JUDET'] == judet5) && product['luna'] == month_min){
+          if(product['JUDET'] != 'TOTAL' && counties.includes(product['JUDET']) && product['luna'] >= month_min && product['luna'] <= month_max ){
             switch(url) {
               case '/educatie':
                 for (var k = 0; k < arr_educatie.length; k++){
                   if (product[arr_educatie[k]]){ 
-                    if(bigData[product['JUDET']] == null){
+                    if(data[arr_educatie[k]] == null){
                       data[arr_educatie[k]] = parseInt(product[arr_educatie[k]]);
                     }
                     else{
@@ -281,20 +269,25 @@
                     }
                   }
                 }
-                if (product[arr_educatie[0]]){
-                  // console.log(data);
-                    for(var l = 0; l < arr_educatie.length; l++){
-                      if(bigData[product['JUDET'[arr_educatie[l]]]] == null){
-                        bigData[product['JUDET'[arr_educatie[l]]]] = data[arr_educatie[l]];
-                      }
-                      else{
-                        bigData[product['JUDET'[arr_educatie[l]]]] += data[arr_educatie[l]];
-                      }
+                
+                for(var l = 0; l < arr_educatie.length; l++){
+                  if (product[arr_educatie[l]]){
+                    if(bigData[product['JUDET']] == null){
+                      bigData[product['JUDET']]= {};
                     }
-                }
+
+                    if(bigData[product['JUDET']][arr_educatie[l]] == null){
+                      bigData[product['JUDET']][arr_educatie[l]] = data[arr_educatie[l]];
+                    }
+                    else{
+                      bigData[product['JUDET']][arr_educatie[l]] += data[arr_educatie[l]];
+                    }
+                  }
+              }
                 break;
 
               case '/varsta':
+
                 for (var k = 0; k < arr_varsta.length; k++){
                   if (product[arr_varsta[k]]){ 
                     if(data[arr_varsta[k]] == null){
@@ -305,30 +298,50 @@
                     }
                   }
                 }
-                if (product[arr_varsta[0]]){
-                  console.log("varsta")
-                  console.log(url);
-                  bigData[product['JUDET']] = data;
                 
-                }
-                break;
-              case '/mediu':
-                for (var k = 0; k < arr_mediu.length; k++){
-                  if (product[arr_mediu[k]]){ 
-                    if(data[arr_mediu[k]] == null){
-                      data[arr_mediu[k]] = parseInt(product[arr_mediu[k]]);
+                for(var l = 0; l < arr_varsta.length; l++){
+                  if (product[arr_varsta[l]]){
+                    if(bigData[product['JUDET']] == null){
+                      bigData[product['JUDET']]= {};
+                    }
+
+                    if(bigData[product['JUDET']][arr_varsta[l]] == null){
+                      bigData[product['JUDET']][arr_varsta[l]] = data[arr_varsta[l]];
                     }
                     else{
-                      data[arr_mediu[k]] += parseInt(product[arr_mediu[k]]);
+                      bigData[product['JUDET']][arr_varsta[l]] += data[arr_varsta[l]];
                     }
                   }
-                }
-                if (product[arr_mediu[0]]){
-                  // console.log(data);
-                  bigData[product['JUDET']] = data;
-                
+              }
+              break;
+              case '/mediu':
+                  for (var k = 0; k < arr_mediu.length; k++){
+                    if (product[arr_mediu[k]]){ 
+                      if(data[arr_mediu[k]] == null){
+                        data[arr_mediu[k]] = parseInt(product[arr_mediu[k]]);
+                      }
+                      else{
+                        data[arr_mediu[k]] += parseInt(product[arr_mediu[k]]);
+                      }
+                    }
+                  }
+                  
+                  for(var l = 0; l < arr_mediu.length; l++){
+                    if (product[arr_mediu[l]]){
+                      if(bigData[product['JUDET']] == null){
+                        bigData[product['JUDET']]= {};
+                      }
+
+                      if(bigData[product['JUDET']][arr_mediu[l]] == null){
+                        bigData[product['JUDET']][arr_mediu[l]] = data[arr_mediu[l]];
+                      }
+                      else{
+                        bigData[product['JUDET']][arr_mediu[l]] += data[arr_mediu[l]];
+                      }
+                    }
                 }
                 break;
+
               case '/tip':
                 for (var k = 0; k < arr_tip.length; k++){
                   if (product[arr_tip[k]]){ 
@@ -340,13 +353,22 @@
                     }
                   }
                 }
-                if (product[arr_tip[0]]){
-                   console.log("in tip");
-                   console.log(url);
-                  bigData[product['JUDET']] = data;
                 
-                }
-                break;
+                for(var l = 0; l < arr_tip.length; l++){
+                  if (product[arr_tip[l]]){
+                    if(bigData[product['JUDET']] == null){
+                      bigData[product['JUDET']]= {};
+                    }
+
+                    if(bigData[product['JUDET']][arr_tip[l]] == null){
+                      bigData[product['JUDET']][arr_tip[l]] = data[arr_tip[l]];
+                    }
+                    else{
+                      bigData[product['JUDET']][arr_tip[l]] += data[arr_tip[l]];
+                    }
+                  }
+              }
+              break;
               default:
                 console.log("default")
             }
@@ -365,7 +387,7 @@
 
       console.log("datele tale:")
          console.log(bigData)
-         createChart(graphicID, bigData);
+         createChart(graphicID, bigData, counties);
         
     }).catch(err => {
       console.log(err)
@@ -373,7 +395,7 @@
 }
 
 
- function createChart(chartId, bigData){
+ function createChart(chartId, bigData, counties){
   if (chartExists(chartId)){
     const valueExist = charts[chartId];
     valueExist.destroy()
@@ -386,32 +408,32 @@
           // labels: varstaFilds,
           datasets: [
               {
-                  label: judet1,
-                  data: bigData[judet1],
+                  label: counties[0],
+                  data: bigData[counties[0]],
                   borderColor: 'red',
                   fill: false
               },
               {
-                label: judet2,
-                data: bigData[judet2],
+                label: counties[1],
+                data: bigData[counties[1]],
                 borderColor: 'blue',
                 fill: false
               },
               {
-                label: judet3,
-                data: bigData[judet3],
+                label: counties[2],
+                data: bigData[counties[2]],
                 borderColor: 'green',
                 fill: false
               },
               {
-                label: judet4,
-                data: bigData[judet4],
+                label: counties[3],
+                data: bigData[counties[3]],
                 borderColor: 'yellow',
                 fill: false
               },
               {
-                label: judet5,
-                data: bigData[judet5],
+                label: counties[4],
+                data: bigData[counties[4]],
                 borderColor: 'black',
                 fill: false
               }
