@@ -1,178 +1,163 @@
- // Varsta buttons ids
- const id_varsta = "button1"
- const id_tip = "button2"
- const id_educatie = "button3"
- const id_mediu = "button4"
+// coloane tabel varsta 
+const id_varsta1 = "Sub 25 ani"
+const id_varsta2 = "25 - 29 ani"
+const id_varsta3 = "30 - 39 ani"
+const id_varsta4 = "40 - 49 ani"
+const id_varsta5 = "50 - 55 ani"
+const id_varsta6 = "peste 55 ani"
 
- const judet1 = "GALATI"
- const judet2 = "BRAILA"
- const judet3 = "NEAMT"
- const judet4 = "IASI"
- const judet5 = "SUCEAVA"
+const arr_varsta = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5, id_varsta6];
 
+
+// Educatie buttons ids
+const id_educatie1 = "fara studii"
+const id_educatie2 = "invatamant primar "
+const id_educatie3 = "invatamant gimnazial "
+const id_educatie4 = "invatamant liceal"
+const id_educatie5 = "invatamant posticeal"
+const id_educatie6 = "invatamant profesional/arte si meserii"
+const id_educatie7 = "invatamant universitar"
+const id_educatie8 = "Total someri, din care: "
+
+const arr_educatie = [id_educatie1, id_educatie2, id_educatie3, id_educatie4, id_educatie5, id_educatie6, id_educatie7, id_educatie8];
+
+// Mediu buttons ids
+const id_mediu1 = "NUMAR TOTAL SOMERI "
+const id_mediu2 = "NUMAR TOTAL SOMERI DIN MEDIUL URBAN "
+const id_mediu3 = "NUMAR SOMERI FEMEI DIN MEDIUL URBAN  "
+const id_mediu4 = "NUMAR SOMERI BARBATI DIN MEDIUL URBAN "
+const id_mediu5 = "NUMAR TOTAL SOMERI DIN MEDIUL RURAL "
+const id_mediu6 = "NUMAR SOMERI FEMEI DIN MEDIUL RURAL "
+const id_mediu7 = "NUMAR SOMERI BARBATI DIN MEDIUL RURAL "
+const id_mediu8 = "NUMAR TOTAL SOMERI FEMEI  "
+const id_mediu9 = "NUMAR TOTAL SOMERI BARBATI "
+
+const arr_mediu = [id_mediu1, id_mediu2, id_mediu3, id_mediu4, id_mediu5, id_mediu6, id_mediu7, id_mediu8, id_mediu9];
+
+// Tip buttons ids
+const id_tip1 = "Numar total someri "
+const id_tip2 = "Numar total someri femei  "
+const id_tip3 = "Numar total someri barbati  "
+const id_tip4 = "Numar  someri indemnizati  "
+const id_tip5 = "Numar someri neindemnizati "
+const id_tip6 = "Rata somajului (%)  "
+const id_tip7 = "Rata somajului Feminina (%)  "
+const id_tip8 = "Rata somajului Masculina (%)  "
+
+const arr_tip = [id_tip1, id_tip2, id_tip3, id_tip4, id_tip5, id_tip6, id_tip7, id_tip8];
+
+// Tip buttons 
+var tip1 = document.getElementById(id_tip1);
+var tip2 = document.getElementById(id_tip2);
+var tip3 = document.getElementById(id_tip3);
+var tip4 = document.getElementById(id_tip4);
+var tip5 = document.getElementById(id_tip5);
+var tip6 = document.getElementById(id_tip6);
+var tip7 = document.getElementById(id_tip7);
+var tip8 = document.getElementById(id_tip8);
+
+// Varsta buttons 
+var varsta = document.getElementById("button1");
+var tip = document.getElementById("button2");
+var educatie = document.getElementById("button3");
+var mediu = document.getElementById("button4");
+
+// Educatie buttons 
+var educatie1 = document.getElementById(id_educatie1);
+var educatie2 = document.getElementById(id_educatie2);
+var educatie3 = document.getElementById(id_educatie3);
+var educatie4 = document.getElementById(id_educatie4);
+var educatie5 = document.getElementById(id_educatie5);
+var educatie6 = document.getElementById(id_educatie6);
+var educatie7 = document.getElementById(id_educatie7);
+var educatie8 = document.getElementById(id_educatie8);
+
+// Mediu buttons
+var mediu1 = document.getElementById(id_mediu1);
+var mediu2 = document.getElementById(id_mediu2);
+var mediu3 = document.getElementById(id_mediu3);
+var mediu4 = document.getElementById(id_mediu4);
+var mediu5 = document.getElementById(id_mediu5);
+var mediu6 = document.getElementById(id_mediu6);
+var mediu7 = document.getElementById(id_mediu7);
+var mediu8 = document.getElementById(id_mediu8);
+var mediu9 = document.getElementById(id_mediu9);
+
+//Legend text 
+var legend1 = document.getElementById("legend1");
+var legend2 = document.getElementById("legend2");
+var legend3 = document.getElementById("legend3");
+var legend4 = document.getElementById("legend4");
+var legend5 = document.getElementById("legend5");
+var legend6 = document.getElementById("legend6");
+
+// Colors code for map coloring
+var colors = ['#b9b9b9', '#ffa6a9','#cc6674', '#992038','#60000e', '#1a0105']
+
+var varstaFilds = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5, id_varsta6]
+var mediuFilds = [id_mediu1, id_mediu1, id_mediu1, id_mediu1, id_mediu1, id_mediu1]
+
+
+// slide range
+const rangeInput = document.querySelectorAll("input");
+
+var checkInput = document.getElementById('check');
+var on = document.getElementsByClassName('on');
+var off = document.getElementsByClassName('off');
+
+checkInput.addEventListener("click", function(){
+    if (checkInput.checked == true) {
+        on[0].style.color="black";
+        off[0].style.color="#253b52";
+    } else {
+        on[0].style.color="#253b52";
+        off[0].style.color="black";
+    }
+})
  
-
- const countyNames = [judet1, judet2, judet3, judet4, judet5];
- // coloane tabel varsta 
- const id_varsta1 = "Sub 25 ani"
- const id_varsta2 = "25 - 29 ani"
- const id_varsta3 = "30 - 39 ani"
- const id_varsta4 = "40 - 49 ani"
- const id_varsta5 = "50 - 55 ani"
- const id_varsta6 = "peste 55 ani"
-
- const arr_varsta = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5, id_varsta6];
-
-
- // Educatie buttons ids
- const id_educatie1 = "fara studii"
- const id_educatie2 = "invatamant primar "
- const id_educatie3 = "invatamant gimnazial "
- const id_educatie4 = "invatamant liceal"
- const id_educatie5 = "invatamant posticeal"
- const id_educatie6 = "invatamant profesional/arte si meserii"
- const id_educatie7 = "invatamant universitar"
- const id_educatie8 = "Total someri, din care: "
-
- const arr_educatie = [id_educatie1, id_educatie2, id_educatie3, id_educatie4, id_educatie5, id_educatie6, id_educatie7, id_educatie8];
- 
- // Mediu buttons ids
- const id_mediu1 = "NUMAR TOTAL SOMERI "
- const id_mediu2 = "NUMAR TOTAL SOMERI DIN MEDIUL URBAN "
- const id_mediu3 = "NUMAR SOMERI FEMEI DIN MEDIUL URBAN  "
- const id_mediu4 = "NUMAR SOMERI BARBATI DIN MEDIUL URBAN "
- const id_mediu5 = "NUMAR TOTAL SOMERI DIN MEDIUL RURAL "
- const id_mediu6 = "NUMAR SOMERI FEMEI DIN MEDIUL RURAL "
- const id_mediu7 = "NUMAR SOMERI BARBATI DIN MEDIUL RURAL "
- const id_mediu8 = "NUMAR TOTAL SOMERI FEMEI  "
- const id_mediu9 = "NUMAR TOTAL SOMERI BARBATI "
-
- const arr_mediu = [id_mediu1, id_mediu2, id_mediu3, id_mediu4, id_mediu5, id_mediu6, id_mediu7, id_mediu8, id_mediu9];
- 
- // Tip buttons ids
- const id_tip1 = "Numar total someri "
- const id_tip2 = "Numar total someri femei  "
- const id_tip3 = "Numar total someri barbati  "
- const id_tip4 = "Numar  someri indemnizati  "
- const id_tip5 = "Numar someri neindemnizati "
- const id_tip6 = "Rata somajului (%)  "
- const id_tip7 = "Rata somajului Feminina (%)  "
- const id_tip8 = "Rata somajului Masculina (%)  "
-
- const arr_tip = [id_tip1, id_tip2, id_tip3, id_tip4, id_tip5, id_tip6, id_tip7, id_tip8];
- 
- // Tip buttons 
- var tip1 = document.getElementById(id_tip1);
- var tip2 = document.getElementById(id_tip2);
- var tip3 = document.getElementById(id_tip3);
- var tip4 = document.getElementById(id_tip4);
- var tip5 = document.getElementById(id_tip5);
- var tip6 = document.getElementById(id_tip6);
- var tip7 = document.getElementById(id_tip7);
- var tip8 = document.getElementById(id_tip8);
- 
- // Varsta buttons 
- var varsta = document.getElementById(id_varsta);
- var tip = document.getElementById(id_tip);
- var educatie = document.getElementById(id_educatie);
- var mediu = document.getElementById(id_mediu);
- 
- // Educatie buttons 
- var educatie1 = document.getElementById(id_educatie1);
- var educatie2 = document.getElementById(id_educatie2);
- var educatie3 = document.getElementById(id_educatie3);
- var educatie4 = document.getElementById(id_educatie4);
- var educatie5 = document.getElementById(id_educatie5);
- var educatie6 = document.getElementById(id_educatie6);
- var educatie7 = document.getElementById(id_educatie7);
- var educatie8 = document.getElementById(id_educatie8);
- 
- // Mediu buttons
- var mediu1 = document.getElementById(id_mediu1);
- var mediu2 = document.getElementById(id_mediu2);
- var mediu3 = document.getElementById(id_mediu3);
- var mediu4 = document.getElementById(id_mediu4);
- var mediu5 = document.getElementById(id_mediu5);
- var mediu6 = document.getElementById(id_mediu6);
- var mediu7 = document.getElementById(id_mediu7);
- var mediu8 = document.getElementById(id_mediu8);
- var mediu9 = document.getElementById(id_mediu9);
- 
- //Legend text 
- var legend1 = document.getElementById("legend1");
- var legend2 = document.getElementById("legend2");
- var legend3 = document.getElementById("legend3");
- var legend4 = document.getElementById("legend4");
- var legend5 = document.getElementById("legend5");
- var legend6 = document.getElementById("legend6");
- 
- // Colors code for map coloring
- var colors = ['#b9b9b9', '#ffa6a9','#cc6674', '#992038','#60000e', '#1a0105']
-
- var varstaFilds = [id_varsta1, id_varsta2, id_varsta3, id_varsta4, id_varsta5, id_varsta6]
- var mediuFilds = [id_mediu1, id_mediu1, id_mediu1, id_mediu1, id_mediu1, id_mediu1]
-
- 
- // slide range
- const rangeInput = document.querySelectorAll("input");
-
- var checkInput = document.getElementById('check');
- var on = document.getElementsByClassName('on');
- var off = document.getElementsByClassName('off');
-
- checkInput.addEventListener("click", function(){
- if (checkInput.checked == true) {
-   on[0].style.color="black";
-   off[0].style.color="#253b52";
- } else {
- on[0].style.color="#253b52";
-   off[0].style.color="black";
- }
- })
- 
- function getGraphicId(){
-   if (checkInput.checked != true) {
-     return "graphic1"
-   } else {
-     return "graphic2"
-   }
+function getGraphicId(){
+    if (checkInput.checked != true) {
+        return "graphic1"
+    } else {
+        return "graphic2"
+    }
  }
 
- // Varsta buttons
- varsta.addEventListener("click", function() {full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/varsta", getGraphicId())}); 
- tip.addEventListener ("click", function() { full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/tip", getGraphicId())})
- educatie.addEventListener("click", function() { full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/educatie", getGraphicId())});
- mediu.addEventListener("click", function() { full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/mediu", getGraphicId())});
+// Varsta buttons
+varsta.addEventListener("click", function() {full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/varsta", getGraphicId())}); 
+tip.addEventListener ("click", function() { full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/tip", getGraphicId())})
+educatie.addEventListener("click", function() { full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/educatie", getGraphicId())});
+mediu.addEventListener("click", function() { full(getSelectedCounties(), rangeInput[0].value, rangeInput[1].value ,  "/mediu", getGraphicId())});
 
 function getSelectedCounties(){
- const county = ['ALBA', 'ARAD', 'ARGES', 'BACAU', 'BIHOR', 'BISTRITA NASAUD', 'BOTOSANI', 'BRAILA', 'BRASOV',
-   'BUZAU', 'CALARASI', 'CARAS-SEVERIN', 'CLUJ', 'CONSTANTA', 'COVASNA', 
-   'DAMBOVITA', 'DOLJ', 'GALATI', 'GIURGIU', 'GORJ', 'HARGHITA', 'HUNEDOARA', 'IALOMITA', 'IASI', 'ILFOV', 
-   'MARAMURES', 'MEHEDINTI', 'BUCURESTI', 'MURES', 'NEAMT', 'OLT', 'PRAHOVA', 
-   'SALAJ', 'SATU MARE', 'SIBIU', 'SUCEAVA', 'TELEORMAN', 'TIMIS', 'TULCEA', 'VALCEA', 'VASLUI', 'VRANCEA']
- var selected = []
- var selector = document.getElementById("selector");
- for(var i = 0; i<42; i++){
-   var option = selector.options[i];
+    const county = ['ALBA', 'ARAD', 'ARGES', 'BACAU', 'BIHOR', 'BISTRITA NASAUD', 'BOTOSANI', 'BRAILA', 'BRASOV',
+    'BUZAU', 'CALARASI', 'CARAS-SEVERIN', 'CLUJ', 'CONSTANTA', 'COVASNA', 
+    'DAMBOVITA', 'DOLJ', 'GALATI', 'GIURGIU', 'GORJ', 'HARGHITA', 'HUNEDOARA', 'IALOMITA', 'IASI', 'ILFOV', 
+    'MARAMURES', 'MEHEDINTI', 'BUCURESTI', 'MURES', 'NEAMT', 'OLT', 'PRAHOVA', 
+    'SALAJ', 'SATU MARE', 'SIBIU', 'SUCEAVA', 'TELEORMAN', 'TIMIS', 'TULCEA', 'VALCEA', 'VASLUI', 'VRANCEA']
+    var selected = []
+    var selector = document.getElementById("selector");
+    for(var i = 0; i<42; i++){
+    var option = selector.options[i];
 
-   if (option.selected) {
-     console.log(county[i]);
-     selected.push(county[i])
-   } 
- }
- return selected;
+        if (option.selected) {
+            console.log(county[i]);
+            selected.push(county[i])
+        } 
+    }
+    return selected;
 }
 
- const values = [];
+const values = [];
  
- var charts = {};
+var charts = {};
 
- function full (counties, month_min, month_max, url, graphicID,){
+function full (counties, month_min, month_max, url, graphicID,){
    prepare(counties, month_min, month_max, url, graphicID);
- }
+}
  
  
- function prepare(counties, month_min, month_max, url, graphicID){
+function prepare(counties, month_min, month_max, url, graphicID){
 
    fetch(url, {
      method: 'GET',
@@ -381,13 +366,13 @@ function getSelectedCounties(){
              } 
          }
        
-     }
+        }
 
 
 
-     console.log("datele tale:")
-        console.log(bigData)
-        createChart(graphicID, bigData, counties);
+    console.log("datele tale:")
+    console.log(bigData)
+    createChart(graphicID, bigData, counties);
        
    }).catch(err => {
      console.log(err)
@@ -451,73 +436,6 @@ function createChart(chartId, bigData, counties){
 function chartExists(chartId) {
  return charts.hasOwnProperty(chartId);
 }
-
-
- // var ctx1 = document.getElementById('graphic2').getContext('2d');
- // var chart1 = new Chart(ctx1, {
- //     type: 'line',
- //     data: {
- //         labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
- //         datasets: [
- //             {
- //                 label: 'Vasrta',
- //                 data: [1456, 2054, 3001, 2345, 3214, 2111],
- //                 borderColor: 'rgba(255, 99, 132, 1)',
- //                 fill: false
- //             }
- //         ]
- //     },
- //     options: {
- //         // Configuration options for the line graph
- //     }
- // });
-
- // var ctx2 = document.getElementById('graphic3').getContext('2d');
- // var chart2 = new Chart(ctx2, {
- //     type: 'line',
- //     data: {
- //         labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
- //         datasets: [
- //             {
- //                 label: 'Vasrta',
- //                 data: [1456, 2054, 3001, 2345, 3214, 2111],
- //                 borderColor: 'rgba(255, 99, 132, 1)',
- //                 fill: false
- //             }
- //         ]
- //     },
- //     options: {
- //         // Configuration options for the line graph
- //     }
- // });
-
- // var ctx3 = document.getElementById('graphic4').getContext('2d');
- // var chart3 = new Chart(ctx3, {
- //     type: 'line',
- //     data: {
- //         labels: ['Sub 25 ani', '25 - 29 ani', '30 - 39 ani', "40 - 49 ani", "50 - 55 ani", "peste 55 ani"],
- //         datasets: [
- //             {
- //                 label: 'Vasrta',
- //                 data: [1456, 2054, 3001, 2345, 3214, 2111],
- //                 borderColor: 'rgba(255, 99, 132, 1)',
- //                 fill: false
- //             }
- //         ]
- //     },
- //     options: {
- //         // Configuration options for the line graph
- //     }
- // });
-
-
- 
-   // Multi select checkbox
- // double range slider end
-
-
-
-
 
 
 

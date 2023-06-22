@@ -50,3 +50,9 @@
     left: 3%;
     top: 0; 
 }
+
+#logout1{
+    position: fixed;
+    bottom: 3%;
+    right: 0px; 
+  }
