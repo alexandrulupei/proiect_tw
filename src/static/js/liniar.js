@@ -531,3 +531,27 @@ rangeInput.forEach((input) => {
   });
 });
 // double range slider end
+
+/*--------- Download buttons ----------*/
+
+var downloadChartJs = () => {
+  html2canvas(document.getElementById("graphic1"), {
+    onrendered: function (canvas) {
+      var img = canvas.toDataURL(); //image data of canvas
+      var doc = new jsPDF('l', 'mm', [297, 210]);
+      doc.addImage(img, 0, 0);
+      doc.save('line_chart.pdf');
+    }
+  });
+  html2canvas(document.getElementById("graphic2"), {
+    onrendered: function (canvas) {
+      var img = canvas.toDataURL(); //image data of canvas
+      var doc = new jsPDF('l', 'mm', [297, 210]);
+      doc.addImage(img, 0, 0);
+      doc.save('line_chart.pdf');
+    }
+  });
+  
+}
+
+document.getElementById("getPDF").addEventListener("click", downloadChartJs);
