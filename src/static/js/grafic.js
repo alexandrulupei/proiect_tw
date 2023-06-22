@@ -146,6 +146,26 @@ if (checkInput.checked == true) {
 }
 })
 
+
+function getSelectedCounties(){
+  const county = ['ALBA', 'ARAD', 'ARGES', 'BACAU', 'BIHOR', 'BISTRITA NASAUD', 'BOTOSANI', 'BRAILA', 'BRASOV',
+  'BUZAU', 'CALARASI', 'CARAS-SEVERIN', 'CLUJ', 'CONSTANTA', 'COVASNA', 
+  'DAMBOVITA', 'DOLJ', 'GALATI', 'GIURGIU', 'GORJ', 'HARGHITA', 'HUNEDOARA', 'IALOMITA', 'IASI', 'ILFOV', 
+  'MARAMURES', 'MEHEDINTI', 'BUCURESTI', 'MURES', 'NEAMT', 'OLT', 'PRAHOVA', 
+  'SALAJ', 'SATU MARE', 'SIBIU', 'SUCEAVA', 'TELEORMAN', 'TIMIS', 'TULCEA', 'VALCEA', 'VASLUI', 'VRANCEA']
+  var selected = []
+  var selector = document.getElementById("selector");
+  for(var i = 0; i<42; i++){
+  var option = selector.options[i];
+
+      if (option.selected) {
+          console.log(county[i]);
+          selected.push(county[i])
+      } 
+  }
+  return selected;
+}
+
 function colourCountries(field, month_min, month_max,  url){
 
     fetch(url, {
@@ -167,12 +187,14 @@ function colourCountries(field, month_min, month_max,  url){
       var countyRate = {}
       var isBaseValue = checkInput.checked
       console.log(isBaseValue)
+      var counties = []
+      counties = getSelectedCounties()
 
       if(month_min == month_max){
 
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
-            if(product['JUDET'] != 'TOTAL' &&  product['luna'] == month_min){
+            if(product['JUDET'] != 'TOTAL' && counties.includes(product['JUDET']) && product['luna'] == month_min){
               if(product[field]){  
                 data[product['JUDET']] = parseInt(product[field]);
               }
@@ -187,7 +209,7 @@ function colourCountries(field, month_min, month_max,  url){
     }else{
         for(var i = 0; i < json.length; i++) {
           var product = json[i];
-            if(product['JUDET'] != 'TOTAL' && product['luna'] >= month_min && product['luna'] <= month_max){
+            if(product['JUDET'] != 'TOTAL' && counties.includes(product['JUDET']) && product['luna'] >= month_min && product['luna'] <= month_max){
               if(product[field]){
                 if(data[product['JUDET']] == null){
                   data[product['JUDET']] = parseInt(product[field]);
@@ -251,8 +273,15 @@ function process_data(data, field, flag){
       // max = round(max)
     var valueRange = Math.floor((max - min) / 5)
     // updateLegend(valueRange, min, field, flag)
+
+    var colorsSelected = []
+    for(var county in data){
+      var colorIndex = Math.floor((data[county] - min) / valueRange);
+      colorsSelected.push(colors[colorIndex])
+  }
+
     console.log(valueRange)
-    createChart(data);
+    createChart(data, colorsSelected);
    
 }
 
@@ -270,69 +299,85 @@ function getRatio(data, countyUnempolyed, countyRate){
   }
   
 
-
-
-var xValues = ["Alba", "Arad", "Argeș", "Bacău", "Bihor", "Bistrița-Năsăud", "Botoșani", "Brăila", "Brașov", 
-                "București", "Buzău", "Călărași", "Caraș-Severin", "Cluj", "Constanța", "Covasna", "Dâmbovița",
-                "Dolj", "Galați", "Giurgiu", "Gorj", "Harghita", "Hunedoara", "Ialomița", "Iași", "Ilfov",
-                "Maramureș", "Mehedinți", "Mureș", "Neamț", "Olt", "Prahova", "Satu Mare", "Sălaj", "Sibiu",
-                "Suceava", "Teleorman", "Timiș", "Tulcea", "Vâlcea", "Vaslui"];
-var yValues = [69, 59, 85, 72, 56, 62, 78, 83, 54, 76, 61, 88, 71, 79, 66, 53, 87, 74, 80, 57, 64, 89, 68, 73, 58, 67, 81, 77, 63, 86, 70, 84, 60, 75, 82, 65, 55, 90, 50, 52, 51];
-var barColors = [
-    "#66ff66","#66ff66", "#66ff66",  "#66ff66",  "#66ff66",  "#66ff66",  "#66ff66",  "#66ff66", "#008000", "#008000","#008000","#008000","#008000","#008000",
-    "#003300", "#003300", "#003300","#003300","#003300", "#003300", "#003300", "#003300", "#ff8080", "#ff8080", "#ff8080", "#ff8080", "#ff8080", "#ff8080",
-    "#ff3333", "#ff3333", "#ff3333", "#ff3333", "#ff3333", "#ff3333", "#ff3333", "#800000", "#800000", "#800000", "#800000", "#1a0000", 
-    "#1a0000", "#1a0000", 
-
-];
-
-function createChart(dataBig ){
-var ctx = document.getElementById('myChart').getContext('2d');
-const datax = dataBig
-var chart = new Chart("myChart", {
-  type: "pie",
-  
-  data: {
-   labels: Object.keys(datax),
-    // labels: xValues2,
-    datasets: [{
-     
-      backgroundColor: barColors,
-      data: Object.values(datax),
-    },
-        
+  function assignColorsToKeys(obj) {
+    const colors = ['red', 'darkred', 'green', 'yellow', 'orange'];
+    const keys = Object.keys(obj);
+    const sortedValues = Object.values(obj).sort((a, b) => a - b);
+    const valueRange = sortedValues[sortedValues.length - 1] - sortedValues[0];
     
-]
-  },
-  
-  options: {
-    title: {
-      display: true,
-      
-    },
-     legend: {
-       position: "bottom",
-       align: "left"
-     }
-     
+    var colorList = [];
+    
+    keys.forEach((key, index) => {
+      const value = obj[key];
+      const normalizedValue = (value - sortedValues[0]) / valueRange;
+      const colorIndex = Math.floor(normalizedValue * (colors.length - 1));
+      const color = colors[colorIndex];
+      colorList.push(color);
+    });
+    
+    return colorList;
   }
-});
-}
 
-/*------------------------- Range Slider -------------------------- */
-  
-// double range slider start
-function collision($div1, $div2) {
-    var x1 = $div1.offset().left;
-    var w1 = 40;
-    var r1 = x1 + w1;
-    var x2 = $div2.offset().left;
-    var w2 = 40;
-    var r2 = x2 + w2;
-      
-    if (r1 < x2 || x1 > r2) return false;
-    return true;
+
+
+var charts = {};
+
+function chartExists(chartId) {
+  return charts.hasOwnProperty(chartId);
+ }
+
+function createChart(dataBig , selectedColors){
+  if (chartExists('myChart')){  
+    const valueExist = charts['myChart'];
+    valueExist.destroy()
+  };
+  var ctx = document.getElementById('myChart').getContext('2d');
+  const datax = dataBig
+  var chart = new Chart("myChart", {
+    type: "pie",
     
+    data: {
+    labels: Object.keys(datax),
+      // labels: xValues2,
+      datasets: [{
+      
+        backgroundColor: selectedColors,
+        data: Object.values(datax),
+      },
+          
+      
+  ]
+    },
+    
+    options: {
+      title: {
+        display: true,
+        
+      },
+      legend: {
+        position: "bottom",
+        align: "left"
+      }
+      
+    }
+  });
+  charts['myChart'] = chart;
+  }
+
+  /*------------------------- Range Slider -------------------------- */
+    
+  // double range slider start
+  function collision($div1, $div2) {
+      var x1 = $div1.offset().left;
+      var w1 = 40;
+      var r1 = x1 + w1;
+      var x2 = $div2.offset().left;
+      var w2 = 40;
+      var r2 = x2 + w2;
+        
+      if (r1 < x2 || x1 > r2) return false;
+      return true;
+      
   }
   
 // // slider call
