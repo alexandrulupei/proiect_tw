@@ -1,4 +1,4 @@
-bodyinfo {
+.bodyinfo {
     font-family: Roboto, sans-serif;
     width: 100%;
     height: 100%;
@@ -11,24 +11,24 @@ bodyinfo {
 
   }
   
-  h1info {
+  .h1info {
     font-weight: 700;
     font-size: 64px;
     margin: 20px 0 0 0;
     padding: 0 20px;
   }
   
-  pinfo {
+  .pinfo {
     font-size: 16px;
     padding: 0 20px;
   }
   
-  eminfo {
+  .eminfo {
     font-style: normal;
     color: #5c17aa;
   }
   
-  ainfo {
+  .ainfo {
     font-style: normal;
     color: #0b0d7a;
     text-decoration: none;

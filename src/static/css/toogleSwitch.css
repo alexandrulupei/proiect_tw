@@ -5,22 +5,22 @@ h2 {
     font-size: 30px;
   }
   
-  .container {
+  .containerswitch {
     display: flex;
     margin-bottom: 5px;
     width: 400px;
     align-items: center;
   }
   
-  .container div {
+  .containerswitch div {
     margin: 20px;
   }
   
   .switch {
     position: relative;
     display: inline-block;
-    width: 100px;
-    height: 50px;
+    width: 80px;
+    height: 30px;
     overflow: hidden;
     background: #253b52;
     border-radius: 5px;
