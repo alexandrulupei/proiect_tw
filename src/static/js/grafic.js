@@ -281,7 +281,7 @@ function process_data(data, field, flag){
   }
 
     console.log(valueRange)
-    createChart(data, colorsSelected);
+    createChart(data, colorsSelected, field);
    
 }
 
@@ -326,7 +326,7 @@ function chartExists(chartId) {
   return charts.hasOwnProperty(chartId);
  }
 
-function createChart(dataBig , selectedColors){
+function createChart(dataBig , selectedColors, field){
   if (chartExists('myChart')){  
     const valueExist = charts['myChart'];
     valueExist.destroy()
@@ -352,7 +352,7 @@ function createChart(dataBig , selectedColors){
     options: {
       title: {
         display: true,
-        
+        text: field
       },
       legend: {
         position: "bottom",
