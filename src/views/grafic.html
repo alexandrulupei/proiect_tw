@@ -5,14 +5,113 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
-        <link rel="stylesheet" type="text/css" href="../static/css/main.css" /> 
+        <link rel="stylesheet" type="text/css" href="../static/css/map.css" /> 
+        <link rel="stylesheet" type="text/css" href="../static/css/toogleSwitch.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/slider.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/menu.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/info.css" />
+        
+        <script type='module' src="../static/js/grafic.js"></script>
+
     </head>
     <body>
-       <h1>
-        Vizualizare Grafica
+        
+       <h1> Vizualizare Grafica</h1>
 
-       </h1>
+       <canvas id="myChart" style="width:100%;max-width:1100px; margin-top: 40px; "></canvas>
 
+<!-- meniu butoane si slider -->
+            
+      <!-- slider -->
+      <div style = "position:absolute; left:810px; top:70px; " > 
+        
+        <div class="double_range_slider_box">
+          <div class="double_range_slider">
+            <span class="range_track" id="range_track"></span>
+      
+            <input type="range" class="min" min="1" max="13" value="1" step="1">
+            <input type="range" class="max" min="0" max="12" value="2" step="1">
+      
+            <div class="minvalue"></div>
+            <div class="maxvalue"></div>
+          </div>
+          <!-- <script type='module' src="../static/js/cartografic.js"></script> -->
+        </div>
+
+
+
+        <!-- toggle switch -->
+        <div class="container">
+          <div class="off">Rata somaj</div>
+          <label class="switch">
+            <input id="check" type="checkbox">
+            <span class="toggle"></span>
+          </label>
+          <div class="on">Numar someri</div>
+          </div>
+
+        <!-- mediu si submeniu -->
+        <div class="dropdown">
+            <button class="button" id="button1">Varsta</button>
+            <div >
+              <a id="Sub 25 ani"> sub 25 ani </a>
+              <a id="25 - 29 ani">25-29 ani</a>
+              <a id="30 - 39 ani">30-39 ani</a>
+              <a id="40 - 49 ani">40-49 ani</a>
+              <a id="50 - 55 ani">50-55 ani</a>
+              <a id="peste 55 ani">peste 55 ani</a>
+              
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="button" id="button2">Totală şi pe sexe</button>
+            <div >
+                <a id="Numar total someri "> total someri</a>
+                <a id="Numar total someri femei  ">  someri femei  </a>
+                <a id="Numar total someri barbati  ">  someri barbati</a>
+                <a id="Numar  someri indemnizati  "> someri indemnizati</a>
+                <a id="Numar someri neindemnizati "> someri neindemnizati </a>
+                <a id="Rata somajului (%)  "> rata somajului totala </a>
+                <a id="Rata somajului Feminina (%)  ">rata somajului feminina</a>
+                <a id="Rata somajului Masculina (%)  ">rata somajului masculina</a>
+
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="button" id="button3">Nivel educatie</button>
+            <div >
+                <a id="Total someri, din care: ">total someri </a>
+                <a id="fara studii">fara studii </a>
+                <a id="invatamant primar ">invatamant primar  </a>
+                <a id="invatamant gimnazial ">invatamant gimnazial </a>
+                <a id="invatamant liceal">invatamant liceal </a>
+                <a id="invatamant posticeal">invatamant postliceali </a>
+                <a id="invatamant profesional/arte si meserii">invatamant profesional/arte si meserii </a>
+                <a id="invatamant universitar">invatamant universitar </a>
+
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="button" id="button4">Mediu Urban/Rural</button>
+            <div >
+                <a id="NUMAR TOTAL SOMERI ">total someri</a>
+                <a id="NUMAR TOTAL SOMERI FEMEI  ">total someri femei</a>
+                <a id="NUMAR TOTAL SOMERI BARBATI ">total someri barbati</a>
+                <a id="NUMAR TOTAL SOMERI DIN MEDIUL URBAN ">someri mediu urban</a>
+                <a id="NUMAR SOMERI FEMEI DIN MEDIUL URBAN ">someri femei mediu urban</a>
+                <a id="NUMAR SOMERI BARBATI DIN MEDIUL URBAN ">someri barbati mediu urban</a>
+                <a id="NUMAR TOTAL SOMERI DIN MEDIUL RURAL ">total someri mediu rural</a>
+                <a id="NUMAR SOMERI FEMEI DIN MEDIUL RURAL ">someri femei mediu rural</a>
+                <a id="NUMAR SOMERI BARBATI DIN MEDIUL RURAL ">someri barbati mediu rural</a>
+
+            </div>
+        </div>
+
+       </div>
+
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+       
 
         <div class="navbar">
             <a href="./home.html" class="active">Home</a>
